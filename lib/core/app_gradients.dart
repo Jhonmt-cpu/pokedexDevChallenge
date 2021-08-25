@@ -17,7 +17,8 @@ class AppGradients {
       Color(0xFFF5F5F5),
       Color(0xFFFFFFFF),
     ],
-    stops: [0.0, 0.695],
-    transform: GradientRotation(2.13959913 * pi),
+    stops: [0.3, 1.0],
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
   );
 }
