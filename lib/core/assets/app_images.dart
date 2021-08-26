@@ -10,4 +10,6 @@ class AppImages {
   static String get grass => "assets/types/grass.svg";
   static String get poison => "assets/types/poison.svg";
   static String get fire => "assets/types/fire.svg";
+
+  static String get bulbassaur => "assets/generations/generation1/001.png";
 }

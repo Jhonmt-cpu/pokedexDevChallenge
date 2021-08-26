@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 
 class AppGradients {
@@ -8,8 +6,9 @@ class AppGradients {
       Color.fromRGBO(255, 255, 255, 0.3),
       Color.fromRGBO(255, 255, 255, 0),
     ],
-    stops: [0.0, 0.695],
-    transform: GradientRotation(2.13959913 * pi),
+    stops: [0, 0.75],
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
   );
 
   static final gradientPokeball = LinearGradient(

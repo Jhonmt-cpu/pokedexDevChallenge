@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pokedex_dev_challenge/core/app_colors.dart';
+import 'package:pokedex_dev_challenge/core/styles/app_colors.dart';
 
 class AppTextStyles {
   static final TextStyle applicationTitle = TextStyle(
