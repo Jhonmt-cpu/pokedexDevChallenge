@@ -1,19 +1,24 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get_it/get_it.dart';
 import 'package:pokedex_dev_challenge/core/styles/app_colors.dart';
 import 'package:pokedex_dev_challenge/core/core.dart';
 import 'package:pokedex_dev_challenge/core/widgets/GradientIcon.dart';
+import 'package:pokedex_dev_challenge/pages/home/bloc/home_bloc.dart';
+import 'package:pokedex_dev_challenge/pages/home/infra/repositories/home_repository.dart';
 import 'package:pokedex_dev_challenge/pages/home/presentation/widgets/pokemon_item.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+  HomePage({Key? key}) : super(key: key);
+
+  final HomeRepository homeRepository = GetIt.instance<HomeRepository>();
 
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
     double statusHeight = MediaQuery.of(context).padding.top;
     double navBarHeight = MediaQuery.of(context).padding.bottom;
     return Scaffold(
@@ -137,16 +142,50 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                  child: ListView.builder(
-                    padding: EdgeInsets.only(
-                      top: 0,
-                      bottom: navBarHeight,
-                    ),
-                    itemCount: 10,
-                    itemBuilder: (context, index) {
-                      return PokemonItem();
-                    },
-                  ),
+                  child: BlocBuilder<HomeBloc, HomeState>(
+                      bloc: BlocProvider.of<HomeBloc>(context),
+                      builder: (context, state) {
+                        if (state is HomeListLoadedState) {
+                          return ListView.builder(
+                            padding: EdgeInsets.only(
+                              top: 0,
+                              bottom: navBarHeight,
+                            ),
+                            physics: BouncingScrollPhysics(),
+                            itemCount: state
+                                .pokemonList.pokemonV2Pokemonspecies!.length,
+                            itemBuilder: (context, index) {
+                              return PokemonItem(
+                                pokemon: state.pokemonList
+                                    .pokemonV2Pokemonspecies![index],
+                              );
+                            },
+                          );
+                        }
+
+                        if (state is HomeListErrorState) {
+                          return Center(
+                            child: Text(
+                              "Falha ao carregar a Lista",
+                            ),
+                          );
+                        }
+
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }),
+                  // child: ListView.builder(
+                  //   padding: EdgeInsets.only(
+                  //     top: 0,
+                  //     bottom: navBarHeight,
+                  //   ),
+                  //   physics: BouncingScrollPhysics(),
+                  //   itemCount: 10,
+                  //   itemBuilder: (context, index) {
+                  //     return PokemonItem();
+                  //   },
+                  // ),
                 )
               ],
             ),

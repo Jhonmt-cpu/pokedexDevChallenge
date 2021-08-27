@@ -6,6 +6,7 @@ import 'package:pokedex_dev_challenge/core/core.dart';
 import 'main.config.dart';
 
 void main() {
+  configureDependecies();
   runApp(AppWidget());
 }
 
