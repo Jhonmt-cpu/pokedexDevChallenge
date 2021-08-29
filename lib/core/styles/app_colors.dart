@@ -8,6 +8,7 @@ class AppColors {
 
   static final Color backgroundWhite = Color(0xFFFFFFFF);
   static final Color backgroundDefaultInput = Color(0xFFF2F2F2);
+  static final Color backgroundPressedInput = Color(0xFFE2E2E2);
 
   static final Color typeGrass = Color(0xFF62B957);
   static final Color typePoison = Color(0xFFA552CC);
@@ -32,7 +33,7 @@ class AppColors {
   static final Color backgroundTypeFire = Color(0xFFFFA756);
   static final Color backgroundTypePoison = Color(0xFF9F6E97);
   static final Color backgroundTypeBug = Color(0xFF8BD674);
-  static final Color backgroundTypeDark = Color(0xFF58575F);
+  static final Color backgroundTypeDark = Color(0xFF6F6E78);
   static final Color backgroundTypeDragon = Color(0xFF7383B9);
   static final Color backgroundTypeElectric = Color(0xFFF2CB55);
   static final Color backgroundTypeFairy = Color(0xFFEBA8C3);

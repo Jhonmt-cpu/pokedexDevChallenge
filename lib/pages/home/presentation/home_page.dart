@@ -2,12 +2,14 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pokedex_dev_challenge/core/styles/app_colors.dart';
 import 'package:pokedex_dev_challenge/core/core.dart';
 import 'package:pokedex_dev_challenge/core/widgets/GradientIcon.dart';
-import 'package:pokedex_dev_challenge/pages/home/bloc/home_bloc.dart';
+import 'package:pokedex_dev_challenge/pages/home/bloc/home_bloc/home_bloc.dart';
+import 'package:pokedex_dev_challenge/pages/home/bloc/input_bloc/input_bloc.dart';
 import 'package:pokedex_dev_challenge/pages/home/infra/repositories/home_repository.dart';
 import 'package:pokedex_dev_challenge/pages/home/presentation/widgets/pokemon_item.dart';
 
@@ -18,6 +20,8 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    InputBloc inputBloc = BlocProvider.of<InputBloc>(context);
+    HomeBloc homeBloc = BlocProvider.of<HomeBloc>(context);
     double screenWidth = MediaQuery.of(context).size.width;
     double statusHeight = MediaQuery.of(context).padding.top;
     double navBarHeight = MediaQuery.of(context).padding.bottom;
@@ -102,64 +106,88 @@ class HomePage extends StatelessWidget {
                     top: 25,
                     bottom: 20,
                   ),
-                  child: FocusScope(
-                    child: Focus(
-                      onFocusChange: (focus) => log("focus: $focus"),
-                      child: TextField(
-                        decoration: InputDecoration(
-                          hintText: "What Pokémon are you looking for?",
-                          hintStyle: AppTextStyles.description,
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide(
-                              color: AppColors.backgroundDefaultInput,
-                            ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide(
-                              color: AppColors.backgroundDefaultInput,
-                            ),
-                          ),
-                          filled: true,
-                          fillColor: AppColors.backgroundDefaultInput,
-                          prefixIcon: Padding(
-                            padding: const EdgeInsets.only(
-                              top: 20,
-                              bottom: 20,
-                              left: 20,
-                              right: 10,
-                            ),
-                            child: SvgPicture.asset(
-                              AppImages.search,
-                              width: 20,
-                              color: AppColors.textGray,
+                  child: BlocBuilder<InputBloc, InputState>(
+                    bloc: inputBloc,
+                    builder: (context, state) {
+                      Color inputBackgroundColor;
+                      if (state is InputUnfocused) {
+                        inputBackgroundColor = AppColors.backgroundDefaultInput;
+                      } else {
+                        inputBackgroundColor = AppColors.backgroundPressedInput;
+                      }
+
+                      return FocusScope(
+                        child: Focus(
+                          onFocusChange: (focus) {
+                            inputBloc.add(InputFocusChange(isFocused: focus));
+                          },
+                          child: TextField(
+                            onChanged: (value) {
+                              homeBloc.add(
+                                FilterListByInputEvent(value: value),
+                              );
+                            },
+                            cursorColor: AppColors.typePsychic,
+                            decoration: InputDecoration(
+                              hintText: "What Pokémon are you looking for?",
+                              hintStyle: AppTextStyles.description,
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide.none,
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide.none,
+                              ),
+                              filled: true,
+                              fillColor: inputBackgroundColor,
+                              prefixIcon: Padding(
+                                padding: const EdgeInsets.only(
+                                  top: 20,
+                                  bottom: 20,
+                                  left: 20,
+                                  right: 10,
+                                ),
+                                child: SvgPicture.asset(
+                                  AppImages.search,
+                                  width: 20,
+                                  color: AppColors.textGray,
+                                ),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ),
+                      );
+                    },
                   ),
                 ),
                 Expanded(
                   child: BlocBuilder<HomeBloc, HomeState>(
-                      bloc: BlocProvider.of<HomeBloc>(context),
+                      bloc: homeBloc,
                       builder: (context, state) {
                         if (state is HomeListLoadedState) {
-                          return ListView.builder(
-                            padding: EdgeInsets.only(
-                              top: 0,
-                              bottom: navBarHeight,
+                          return AnimationLimiter(
+                            child: ListView.builder(
+                              padding: EdgeInsets.only(
+                                top: 0,
+                                bottom: navBarHeight,
+                              ),
+                              physics: BouncingScrollPhysics(),
+                              itemCount: state.pokemonList.length,
+                              itemBuilder: (context, index) {
+                                return AnimationConfiguration.staggeredList(
+                                  position: index,
+                                  duration: const Duration(milliseconds: 500),
+                                  child: ScaleAnimation(
+                                    child: FadeInAnimation(
+                                      child: PokemonItem(
+                                        pokemon: state.pokemonList[index],
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
                             ),
-                            physics: BouncingScrollPhysics(),
-                            itemCount: state
-                                .pokemonList.pokemonV2Pokemonspecies!.length,
-                            itemBuilder: (context, index) {
-                              return PokemonItem(
-                                pokemon: state.pokemonList
-                                    .pokemonV2Pokemonspecies![index],
-                              );
-                            },
                           );
                         }
 
@@ -175,17 +203,6 @@ class HomePage extends StatelessWidget {
                           child: CircularProgressIndicator(),
                         );
                       }),
-                  // child: ListView.builder(
-                  //   padding: EdgeInsets.only(
-                  //     top: 0,
-                  //     bottom: navBarHeight,
-                  //   ),
-                  //   physics: BouncingScrollPhysics(),
-                  //   itemCount: 10,
-                  //   itemBuilder: (context, index) {
-                  //     return PokemonItem();
-                  //   },
-                  // ),
                 )
               ],
             ),

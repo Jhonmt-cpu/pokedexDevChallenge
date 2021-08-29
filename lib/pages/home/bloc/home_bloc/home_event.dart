@@ -12,3 +12,9 @@ class FetchHomeListEvent extends HomeEvent {
 
   FetchHomeListEvent({required this.generationId});
 }
+
+class FilterListByInputEvent extends HomeEvent {
+  final String value;
+
+  FilterListByInputEvent({required this.value});
+}

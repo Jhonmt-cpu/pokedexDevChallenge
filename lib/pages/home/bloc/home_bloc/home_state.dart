@@ -10,7 +10,10 @@ abstract class HomeState extends Equatable {
 class HomeListLoadingState extends HomeState {}
 
 class HomeListLoadedState extends HomeState {
-  final PokemonsGeneration pokemonList;
+  final List<PokemonV2Pokemonspecies> pokemonList;
+
+  @override
+  List<Object> get props => [pokemonList];
 
   HomeListLoadedState({required this.pokemonList});
 }
