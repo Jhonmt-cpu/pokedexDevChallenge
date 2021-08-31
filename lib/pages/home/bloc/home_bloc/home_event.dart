@@ -8,9 +8,9 @@ abstract class HomeEvent extends Equatable {
 }
 
 class FetchHomeListEvent extends HomeEvent {
-  final int generationId;
+  final int? generationId;
 
-  FetchHomeListEvent({required this.generationId});
+  FetchHomeListEvent({this.generationId});
 }
 
 class FilterListByInputEvent extends HomeEvent {

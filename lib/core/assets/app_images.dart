@@ -6,6 +6,7 @@ class AppImages {
   static String get sort => "assets/icons/sort.svg";
   static String get filter => "assets/icons/filter.svg";
   static String get search => "assets/icons/search.svg";
+  static String get noConnection => "assets/icons/no-connection.svg";
 
   static String get grass => "assets/types/grass.svg";
   static String get poison => "assets/types/poison.svg";
@@ -26,5 +27,28 @@ class AppImages {
   static String get steel => "assets/types/steel.svg";
   static String get water => "assets/types/water.svg";
 
-  static String get bulbassaur => "assets/generations/generation1/001.png";
+  static String get pokemon001 => "assets/generations/generation1/001.png";
+  static String get pokemon004 => "assets/generations/generation1/004.png";
+  static String get pokemon007 => "assets/generations/generation1/007.png";
+  static String get pokemon152 => "assets/generations/generation2/152.png";
+  static String get pokemon155 => "assets/generations/generation2/155.png";
+  static String get pokemon158 => "assets/generations/generation2/158.png";
+  static String get pokemon252 => "assets/generations/generation3/252.png";
+  static String get pokemon255 => "assets/generations/generation3/255.png";
+  static String get pokemon258 => "assets/generations/generation3/258.png";
+  static String get pokemon387 => "assets/generations/generation4/387.png";
+  static String get pokemon390 => "assets/generations/generation4/390.png";
+  static String get pokemon393 => "assets/generations/generation4/393.png";
+  static String get pokemon495 => "assets/generations/generation5/495.png";
+  static String get pokemon498 => "assets/generations/generation5/498.png";
+  static String get pokemon501 => "assets/generations/generation5/501.png";
+  static String get pokemon650 => "assets/generations/generation6/650.png";
+  static String get pokemon653 => "assets/generations/generation6/653.png";
+  static String get pokemon656 => "assets/generations/generation6/656.png";
+  static String get pokemon722 => "assets/generations/generation7/722.png";
+  static String get pokemon725 => "assets/generations/generation7/725.png";
+  static String get pokemon728 => "assets/generations/generation7/728.png";
+  static String get pokemon810 => "assets/generations/generation8/810.png";
+  static String get pokemon813 => "assets/generations/generation8/813.png";
+  static String get pokemon816 => "assets/generations/generation8/816.png";
 }

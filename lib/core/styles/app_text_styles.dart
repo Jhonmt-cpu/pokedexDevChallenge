@@ -14,6 +14,12 @@ class AppTextStyles {
     fontSize: 16,
     fontWeight: FontWeight.w400,
   );
+  static final TextStyle generationSelected = TextStyle(
+    fontFamily: 'SfPro',
+    color: AppColors.textWhite,
+    fontSize: 16,
+    fontWeight: FontWeight.w400,
+  );
   static final TextStyle pokemonName = TextStyle(
     fontFamily: 'SfPro',
     color: AppColors.textWhite,
@@ -31,5 +37,17 @@ class AppTextStyles {
     color: AppColors.textWhite,
     fontSize: 12,
     fontWeight: FontWeight.w500,
+  );
+  static final TextStyle errorList = TextStyle(
+    fontFamily: 'SfPro',
+    color: AppColors.textGray,
+    fontSize: 18,
+    fontWeight: FontWeight.w400,
+  );
+  static final TextStyle tabTitle = TextStyle(
+    fontFamily: 'SfPro',
+    color: AppColors.textBlack,
+    fontSize: 26,
+    fontWeight: FontWeight.w700,
   );
 }

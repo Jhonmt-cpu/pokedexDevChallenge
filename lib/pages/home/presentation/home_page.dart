@@ -10,8 +10,10 @@ import 'package:pokedex_dev_challenge/core/core.dart';
 import 'package:pokedex_dev_challenge/core/widgets/GradientIcon.dart';
 import 'package:pokedex_dev_challenge/pages/home/bloc/home_bloc/home_bloc.dart';
 import 'package:pokedex_dev_challenge/pages/home/bloc/input_bloc/input_bloc.dart';
+import 'package:pokedex_dev_challenge/pages/home/bloc/sliding_sheet/sliding_sheet_bloc.dart';
 import 'package:pokedex_dev_challenge/pages/home/infra/repositories/home_repository.dart';
 import 'package:pokedex_dev_challenge/pages/home/presentation/widgets/pokemon_item.dart';
+import 'package:pokedex_dev_challenge/pages/home/presentation/widgets/sliding_sheet_tabs/generation_tab/generation_tab.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
@@ -22,11 +24,14 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     InputBloc inputBloc = BlocProvider.of<InputBloc>(context);
     HomeBloc homeBloc = BlocProvider.of<HomeBloc>(context);
+    SlidingSheetBloc slidingSheetBloc =
+        BlocProvider.of<SlidingSheetBloc>(context);
     double screenWidth = MediaQuery.of(context).size.width;
     double statusHeight = MediaQuery.of(context).padding.top;
     double navBarHeight = MediaQuery.of(context).padding.bottom;
     return Scaffold(
       backgroundColor: AppColors.backgroundWhite,
+      resizeToAvoidBottomInset: false,
       body: Stack(
         clipBehavior: Clip.none,
         alignment: Alignment.topCenter,
@@ -56,7 +61,12 @@ class HomePage extends StatelessWidget {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        log("Clicou geração");
+                        slidingSheetBloc.add(
+                          OpenSlidingSheetEvent(
+                            context: context,
+                            page: GenerationTab(),
+                          ),
+                        );
                       },
                       behavior: HitTestBehavior.opaque,
                       child: SvgPicture.asset(
@@ -192,9 +202,32 @@ class HomePage extends StatelessWidget {
                         }
 
                         if (state is HomeListErrorState) {
-                          return Center(
-                            child: Text(
-                              "Falha ao carregar a Lista",
+                          return GestureDetector(
+                            onTap: () {
+                              homeBloc.add(FetchHomeListEvent());
+                            },
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  height: 100,
+                                ),
+                                Text(
+                                  "Ops!, it seems an error ocourred while getting your list, tap to try again.",
+                                  textAlign: TextAlign.center,
+                                  style: AppTextStyles.errorList,
+                                ),
+                                SizedBox(
+                                  height: 45,
+                                ),
+                                SvgPicture.asset(
+                                  AppImages.noConnection,
+                                  height: 100,
+                                  width: 100,
+                                  color: AppColors.textGray,
+                                )
+                              ],
                             ),
                           );
                         }

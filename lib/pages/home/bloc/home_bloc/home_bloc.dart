@@ -17,13 +17,20 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   List<PokemonV2Pokemonspecies>? pokemonList;
 
+  int generation = 1;
+
   @override
   Stream<HomeState> mapEventToState(
     HomeEvent event,
   ) async* {
     if (event is FetchHomeListEvent) {
+      yield HomeListLoadingState();
+      this.pokemonList = null;
+      if (event.generationId != null) {
+        this.generation = event.generationId!;
+      }
       var fetchedList =
-          await _homeRepository.getPokemonsByGeneration(event.generationId);
+          await _homeRepository.getPokemonsByGeneration(generation);
 
       yield fetchedList.fold((l) => HomeListErrorState(), (pokemonGeneration) {
         this.pokemonList = pokemonGeneration.pokemonV2Pokemonspecies;

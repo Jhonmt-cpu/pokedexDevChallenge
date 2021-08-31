@@ -20,4 +20,24 @@ class AppGradients {
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
   );
+
+  static final gradientVectorWhite = LinearGradient(
+    colors: [
+      Color.fromRGBO(255, 255, 255, 0.1),
+      Color.fromRGBO(255, 255, 255, 0),
+    ],
+    stops: [0.4, 0.9],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
+
+  static final gradientPokeballWhite = LinearGradient(
+    colors: [
+      Color.fromRGBO(255, 255, 255, 0.1),
+      Color.fromRGBO(255, 255, 255, 0),
+    ],
+    stops: [0.7, 0.9],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
 }
