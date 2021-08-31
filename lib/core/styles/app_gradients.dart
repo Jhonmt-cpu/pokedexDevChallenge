@@ -40,4 +40,24 @@ class AppGradients {
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
+
+  static final gradientVectorGrey = LinearGradient(
+    colors: [
+      Color.fromRGBO(229, 229, 229, 1),
+      Color.fromRGBO(245, 245, 245, 0),
+    ],
+    stops: [0.4, 0.9],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
+
+  static final gradientPokeballGrey = LinearGradient(
+    colors: [
+      Color.fromRGBO(236, 236, 236, 1),
+      Color.fromRGBO(245, 245, 245, 1),
+    ],
+    stops: [0.7, 0.9],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
 }

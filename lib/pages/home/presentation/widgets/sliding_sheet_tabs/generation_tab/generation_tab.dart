@@ -1,9 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokedex_dev_challenge/core/core.dart';
+import 'package:pokedex_dev_challenge/pages/home/bloc/generation_tab/generation_tab_bloc.dart';
+import 'package:pokedex_dev_challenge/pages/home/bloc/home_bloc/home_bloc.dart';
 import 'package:pokedex_dev_challenge/pages/home/presentation/widgets/sliding_sheet_tabs/generation_tab/widgets/generation_item.dart';
 
 class GenerationTab extends StatelessWidget {
-  const GenerationTab({Key? key}) : super(key: key);
+  const GenerationTab({
+    Key? key,
+    required this.homeBloc,
+    required this.generationTabBloc,
+  }) : super(key: key);
+
+  final HomeBloc homeBloc;
+  final GenerationTabBloc generationTabBloc;
 
   @override
   Widget build(BuildContext context) {
@@ -14,109 +24,80 @@ class GenerationTab extends StatelessWidget {
         right: 40,
         bottom: 50,
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "Generations",
-            style: AppTextStyles.tabTitle,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(
-              top: 5,
-              bottom: 35,
-            ),
-            child: Text(
-              "Use search for generations to explore your Pokémon",
-              style: AppTextStyles.description,
-            ),
-          ),
-          Row(
+      child: BlocBuilder<GenerationTabBloc, GenerationTabState>(
+        bloc: generationTabBloc,
+        builder: (context, state) {
+          state as GeneraionTabSelected;
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(
-                child: GenerationItem(
-                  generationId: 1,
-                  isSelected: true,
+              Text(
+                "Generations",
+                style: AppTextStyles.tabTitle,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 5,
+                  bottom: 35,
+                ),
+                child: Text(
+                  "Use search for generations to explore your Pokémon",
+                  style: AppTextStyles.description,
                 ),
               ),
-              SizedBox(
-                width: 14,
-              ),
-              Expanded(
-                child: GenerationItem(
-                  generationId: 2,
-                  isSelected: false,
-                ),
-              ),
+              ...[1, 2, 3, 4].map((e) {
+                int firstId = (e * 2) - 1;
+                int secondId = e * 2;
+                return Padding(
+                  padding: EdgeInsets.only(bottom: 14),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () {
+                            if (generationTabBloc.generationId != firstId) {
+                              generationTabBloc.add(ChangeGeneration(
+                                generationIdSelected: firstId,
+                              ));
+                              homeBloc.add(FetchHomeListEvent(
+                                generationId: firstId,
+                              ));
+                            }
+                          },
+                          child: GenerationItem(
+                            generationId: firstId,
+                            isSelected: firstId == state.generationIdSelected,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 14,
+                      ),
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () {
+                            if (generationTabBloc.generationId != secondId) {
+                              generationTabBloc.add(ChangeGeneration(
+                                generationIdSelected: secondId,
+                              ));
+                              homeBloc.add(FetchHomeListEvent(
+                                generationId: secondId,
+                              ));
+                            }
+                          },
+                          child: GenerationItem(
+                            generationId: secondId,
+                            isSelected: secondId == state.generationIdSelected,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }).toList(),
             ],
-          ),
-          SizedBox(
-            height: 14,
-          ),
-          Row(
-            children: [
-              Expanded(
-                child: GenerationItem(
-                  generationId: 3,
-                  isSelected: true,
-                ),
-              ),
-              SizedBox(
-                width: 14,
-              ),
-              Expanded(
-                child: GenerationItem(
-                  generationId: 4,
-                  isSelected: false,
-                ),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 14,
-          ),
-          Row(
-            children: [
-              Expanded(
-                child: GenerationItem(
-                  generationId: 5,
-                  isSelected: true,
-                ),
-              ),
-              SizedBox(
-                width: 14,
-              ),
-              Expanded(
-                child: GenerationItem(
-                  generationId: 6,
-                  isSelected: false,
-                ),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 14,
-          ),
-          Row(
-            children: [
-              Expanded(
-                child: GenerationItem(
-                  generationId: 7,
-                  isSelected: true,
-                ),
-              ),
-              SizedBox(
-                width: 14,
-              ),
-              Expanded(
-                child: GenerationItem(
-                  generationId: 8,
-                  isSelected: false,
-                ),
-              ),
-            ],
-          ),
-        ],
+          );
+        },
       ),
     );
   }

@@ -8,6 +8,7 @@ import 'package:get_it/get_it.dart';
 import 'package:pokedex_dev_challenge/core/styles/app_colors.dart';
 import 'package:pokedex_dev_challenge/core/core.dart';
 import 'package:pokedex_dev_challenge/core/widgets/GradientIcon.dart';
+import 'package:pokedex_dev_challenge/pages/home/bloc/generation_tab/generation_tab_bloc.dart';
 import 'package:pokedex_dev_challenge/pages/home/bloc/home_bloc/home_bloc.dart';
 import 'package:pokedex_dev_challenge/pages/home/bloc/input_bloc/input_bloc.dart';
 import 'package:pokedex_dev_challenge/pages/home/bloc/sliding_sheet/sliding_sheet_bloc.dart';
@@ -26,6 +27,8 @@ class HomePage extends StatelessWidget {
     HomeBloc homeBloc = BlocProvider.of<HomeBloc>(context);
     SlidingSheetBloc slidingSheetBloc =
         BlocProvider.of<SlidingSheetBloc>(context);
+    GenerationTabBloc generationTabBloc =
+        BlocProvider.of<GenerationTabBloc>(context);
     double screenWidth = MediaQuery.of(context).size.width;
     double statusHeight = MediaQuery.of(context).padding.top;
     double navBarHeight = MediaQuery.of(context).padding.bottom;
@@ -64,7 +67,10 @@ class HomePage extends StatelessWidget {
                         slidingSheetBloc.add(
                           OpenSlidingSheetEvent(
                             context: context,
-                            page: GenerationTab(),
+                            page: GenerationTab(
+                              generationTabBloc: generationTabBloc,
+                              homeBloc: homeBloc,
+                            ),
                           ),
                         );
                       },

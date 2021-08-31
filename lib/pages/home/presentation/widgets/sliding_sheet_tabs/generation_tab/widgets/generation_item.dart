@@ -18,41 +18,49 @@ class GenerationItem extends StatelessWidget {
       "image1": AppImages.pokemon001,
       "image2": AppImages.pokemon004,
       "image3": AppImages.pokemon007,
+      "text": "Generation Ⅰ",
     },
     {
       "image1": AppImages.pokemon152,
       "image2": AppImages.pokemon155,
       "image3": AppImages.pokemon158,
+      "text": "Generation Ⅱ",
     },
     {
       "image1": AppImages.pokemon252,
       "image2": AppImages.pokemon255,
       "image3": AppImages.pokemon258,
+      "text": "Generation Ⅲ",
     },
     {
       "image1": AppImages.pokemon387,
       "image2": AppImages.pokemon390,
       "image3": AppImages.pokemon393,
+      "text": "Generation Ⅳ",
     },
     {
       "image1": AppImages.pokemon495,
       "image2": AppImages.pokemon498,
       "image3": AppImages.pokemon501,
+      "text": "Generation Ⅴ",
     },
     {
       "image1": AppImages.pokemon650,
       "image2": AppImages.pokemon653,
       "image3": AppImages.pokemon656,
+      "text": "Generation Ⅵ",
     },
     {
       "image1": AppImages.pokemon722,
       "image2": AppImages.pokemon725,
       "image3": AppImages.pokemon728,
+      "text": "Generation Ⅶ",
     },
     {
       "image1": AppImages.pokemon810,
       "image2": AppImages.pokemon813,
       "image3": AppImages.pokemon816,
+      "text": "Generation Ⅷ",
     },
   ];
 
@@ -61,6 +69,7 @@ class GenerationItem extends StatelessWidget {
     String image1 = config[generationId - 1]["image1"] as String;
     String image2 = config[generationId - 1]["image2"] as String;
     String image3 = config[generationId - 1]["image3"] as String;
+    String text = config[generationId - 1]["text"] as String;
     Color backgroundColor =
         isSelected ? AppColors.typePsychic : AppColors.backgroundDefaultInput;
     return Stack(
@@ -78,7 +87,9 @@ class GenerationItem extends StatelessWidget {
           child: GradientIcon(
             icon: AppImages.pattern6x3,
             size: 80,
-            gradient: AppGradients.gradientVectorWhite,
+            gradient: isSelected
+                ? AppGradients.gradientVectorWhite
+                : AppGradients.gradientVectorGrey,
           ),
         ),
         Positioned(
@@ -87,7 +98,9 @@ class GenerationItem extends StatelessWidget {
           child: GradientIcon(
             icon: AppImages.pokeball,
             size: 110,
-            gradient: AppGradients.gradientPokeballWhite,
+            gradient: isSelected
+                ? AppGradients.gradientPokeballWhite
+                : AppGradients.gradientPokeballGrey,
           ),
         ),
         Container(
@@ -123,8 +136,10 @@ class GenerationItem extends StatelessWidget {
                 height: 15,
               ),
               Text(
-                "Generation l",
-                style: AppTextStyles.generationSelected,
+                text,
+                style: isSelected
+                    ? AppTextStyles.generationSelected
+                    : AppTextStyles.description,
               ),
             ],
           ),

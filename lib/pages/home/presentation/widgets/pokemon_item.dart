@@ -132,7 +132,7 @@ class PokemonItem extends StatelessWidget {
       "fairy": AppColors.backgroundTypeFairy,
       "fighting": AppColors.backgroundTypeFighting,
       "fire": AppColors.backgroundTypeFire,
-      "flying": AppColors.backgroundTypeFighting,
+      "flying": AppColors.backgroundTypeFlying,
       "ghost": AppColors.backgroundTypeGhost,
       "ground": AppColors.backgroundTypeGround,
       "ice": AppColors.backgroundTypeIce,

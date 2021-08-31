@@ -6,3 +6,12 @@ abstract class GenerationTabEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class ChangeGeneration extends GenerationTabEvent {
+  final int generationIdSelected;
+
+  ChangeGeneration({required this.generationIdSelected});
+
+  @override
+  List<Object> get props => [generationIdSelected];
+}
