@@ -18,3 +18,9 @@ class FilterListByInputEvent extends HomeEvent {
 
   FilterListByInputEvent({required this.value});
 }
+
+class SortListEvent extends HomeEvent {
+  final int sortType;
+
+  SortListEvent({required this.sortType});
+}

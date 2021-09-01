@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokedex_dev_challenge/core/core.dart';
 import 'package:pokedex_dev_challenge/pages/home/bloc/generation_tab/generation_tab_bloc.dart';
 import 'package:pokedex_dev_challenge/pages/home/bloc/home_bloc/home_bloc.dart';
-import 'package:pokedex_dev_challenge/pages/home/presentation/widgets/sliding_sheet_tabs/generation_tab/widgets/generation_item.dart';
+import './widgets/generation_item.dart';
 
 class GenerationTab extends StatelessWidget {
   const GenerationTab({

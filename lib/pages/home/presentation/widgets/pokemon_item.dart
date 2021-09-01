@@ -17,11 +17,10 @@ class PokemonItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String name = pokemon.name!;
+    String name = pokemon.name;
     String nameWithFirstUpperCase = name[0].toUpperCase() + name.substring(1);
     Color backgroundColor = _defineBackgroundTypeColor(
-      pokemon
-          .pokemonV2Pokemons![0].pokemonV2Pokemontypes![0].pokemonV2Type!.name!,
+      pokemon.pokemonV2Pokemons[0].pokemonV2Pokemontypes[0].pokemonV2Type.name,
     );
     return Stack(
       children: [
@@ -73,11 +72,8 @@ class PokemonItem extends StatelessWidget {
                 child: CircularProgressIndicator(
                   value: downloadProgress.progress,
                   valueColor: AlwaysStoppedAnimation<Color>(
-                    typeColorsConfig[pokemon
-                        .pokemonV2Pokemons![0]
-                        .pokemonV2Pokemontypes![0]
-                        .pokemonV2Type!
-                        .name!] as Color,
+                    typeColorsConfig[pokemon.pokemonV2Pokemons[0]
+                        .pokemonV2Pokemontypes[0].pokemonV2Type.name] as Color,
                   ),
                 ),
               ),
@@ -106,11 +102,11 @@ class PokemonItem extends StatelessWidget {
                 height: 5,
               ),
               Row(
-                children: pokemon.pokemonV2Pokemons![0].pokemonV2Pokemontypes!
+                children: pokemon.pokemonV2Pokemons[0].pokemonV2Pokemontypes
                     .map((element) {
                   return Padding(
                     padding: const EdgeInsets.only(left: 5),
-                    child: Badge(type: element.pokemonV2Type!.name!),
+                    child: Badge(type: element.pokemonV2Type.name),
                   );
                 }).toList(),
               ),

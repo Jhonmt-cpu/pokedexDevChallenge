@@ -44,7 +44,7 @@ class HomeRepositoryImpl implements HomeRepository {
         throw new Error();
       }
 
-      PokemonsGeneration pokemonsGeneration = PokemonsGeneration.fromJson(
+      PokemonsGeneration pokemonsGeneration = PokemonsGeneration.fromMap(
         response["data"]["pokemon_v2_generation_by_pk"],
       );
 

@@ -12,9 +12,11 @@ import 'package:pokedex_dev_challenge/pages/home/bloc/generation_tab/generation_
 import 'package:pokedex_dev_challenge/pages/home/bloc/home_bloc/home_bloc.dart';
 import 'package:pokedex_dev_challenge/pages/home/bloc/input_bloc/input_bloc.dart';
 import 'package:pokedex_dev_challenge/pages/home/bloc/sliding_sheet/sliding_sheet_bloc.dart';
+import 'package:pokedex_dev_challenge/pages/home/bloc/sort_tab/sort_tab_bloc.dart';
 import 'package:pokedex_dev_challenge/pages/home/infra/repositories/home_repository.dart';
 import 'package:pokedex_dev_challenge/pages/home/presentation/widgets/pokemon_item.dart';
-import 'package:pokedex_dev_challenge/pages/home/presentation/widgets/sliding_sheet_tabs/generation_tab/generation_tab.dart';
+import 'package:pokedex_dev_challenge/pages/home/presentation/widgets/sliding_sheet_tabs/generation_tab.dart';
+import 'package:pokedex_dev_challenge/pages/home/presentation/widgets/sliding_sheet_tabs/sort_tab.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
@@ -29,6 +31,8 @@ class HomePage extends StatelessWidget {
         BlocProvider.of<SlidingSheetBloc>(context);
     GenerationTabBloc generationTabBloc =
         BlocProvider.of<GenerationTabBloc>(context);
+    SortTabBloc sortTabBloc = BlocProvider.of<SortTabBloc>(context);
+
     double screenWidth = MediaQuery.of(context).size.width;
     double statusHeight = MediaQuery.of(context).padding.top;
     double navBarHeight = MediaQuery.of(context).padding.bottom;
@@ -85,6 +89,17 @@ class HomePage extends StatelessWidget {
                       width: 20,
                     ),
                     GestureDetector(
+                      onTap: () {
+                        slidingSheetBloc.add(
+                          OpenSlidingSheetEvent(
+                            context: context,
+                            page: SortTab(
+                              homeBloc: homeBloc,
+                              sortTabBloc: sortTabBloc,
+                            ),
+                          ),
+                        );
+                      },
                       child: SvgPicture.asset(
                         AppImages.sort,
                         color: AppColors.textBlack,

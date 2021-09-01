@@ -1,116 +1,162 @@
-class PokemonsGeneration {
-  List<PokemonV2Pokemonspecies>? pokemonV2Pokemonspecies;
+import 'dart:convert';
 
-  PokemonsGeneration({this.pokemonV2Pokemonspecies});
+import 'package:equatable/equatable.dart';
 
-  PokemonsGeneration.fromJson(Map<String, dynamic> json) {
-    if (json['pokemon_v2_pokemonspecies'] != null) {
-      List<PokemonV2Pokemonspecies> pokemonV2Pokemonspecies = [];
-      json['pokemon_v2_pokemonspecies'].forEach((v) {
-        pokemonV2Pokemonspecies.add(new PokemonV2Pokemonspecies.fromJson(v));
-      });
-      this.pokemonV2Pokemonspecies = pokemonV2Pokemonspecies;
-    }
+class PokemonsGeneration extends Equatable {
+  final List<PokemonV2Pokemonspecies> pokemonV2Pokemonspecies;
+
+  PokemonsGeneration({required this.pokemonV2Pokemonspecies});
+
+  @override
+  List<Object?> get props => [pokemonV2Pokemonspecies];
+
+  Map<String, dynamic> toMap() {
+    return {
+      'pokemon_v2_pokemonspecies':
+          pokemonV2Pokemonspecies.map((x) => x.toMap()).toList(),
+    };
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.pokemonV2Pokemonspecies != null) {
-      data['pokemon_v2_pokemonspecies'] =
-          this.pokemonV2Pokemonspecies!.map((v) => v.toJson()).toList();
-    }
-    return data;
+  factory PokemonsGeneration.fromMap(Map<String, dynamic> map) {
+    return PokemonsGeneration(
+      pokemonV2Pokemonspecies: List<PokemonV2Pokemonspecies>.from(
+          map['pokemon_v2_pokemonspecies']
+              ?.map((x) => PokemonV2Pokemonspecies.fromMap(x))),
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory PokemonsGeneration.fromJson(String source) =>
+      PokemonsGeneration.fromMap(json.decode(source));
+}
+
+class PokemonV2Pokemonspecies extends Equatable {
+  final String name;
+  final int id;
+  final List<PokemonV2Pokemons> pokemonV2Pokemons;
+
+  PokemonV2Pokemonspecies({
+    required this.name,
+    required this.id,
+    required this.pokemonV2Pokemons,
+  });
+
+  @override
+  List<Object?> get props => [name, id, pokemonV2Pokemons];
+
+  Map<String, dynamic> toMap() {
+    return {
+      'name': name,
+      'id': id,
+      'pokemon_v2_pokemons': pokemonV2Pokemons.map((x) => x.toMap()).toList(),
+    };
+  }
+
+  factory PokemonV2Pokemonspecies.fromMap(Map<String, dynamic> map) {
+    return PokemonV2Pokemonspecies(
+      name: map['name'],
+      id: map['id'],
+      pokemonV2Pokemons: List<PokemonV2Pokemons>.from(
+          map['pokemon_v2_pokemons']?.map((x) => PokemonV2Pokemons.fromMap(x))),
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory PokemonV2Pokemonspecies.fromJson(String source) =>
+      PokemonV2Pokemonspecies.fromMap(json.decode(source));
+
+  PokemonV2Pokemonspecies copyWith({
+    String? name,
+    int? id,
+    List<PokemonV2Pokemons>? pokemonV2Pokemons,
+  }) {
+    return PokemonV2Pokemonspecies(
+      name: name ?? this.name,
+      id: id ?? this.id,
+      pokemonV2Pokemons: pokemonV2Pokemons ?? this.pokemonV2Pokemons,
+    );
   }
 }
 
-class PokemonV2Pokemonspecies {
-  String? name;
-  int? id;
-  List<PokemonV2Pokemons>? pokemonV2Pokemons;
+class PokemonV2Pokemons extends Equatable {
+  final List<PokemonV2Pokemontypes> pokemonV2Pokemontypes;
 
-  PokemonV2Pokemonspecies({this.name, this.id, this.pokemonV2Pokemons});
+  PokemonV2Pokemons({required this.pokemonV2Pokemontypes});
 
-  PokemonV2Pokemonspecies.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
-    id = json['id'];
-    if (json['pokemon_v2_pokemons'] != null) {
-      List<PokemonV2Pokemons> pokemonV2Pokemons = [];
-      json['pokemon_v2_pokemons'].forEach((v) {
-        pokemonV2Pokemons.add(new PokemonV2Pokemons.fromJson(v));
-      });
-      this.pokemonV2Pokemons = pokemonV2Pokemons;
-    }
+  @override
+  List<Object?> get props => [pokemonV2Pokemontypes];
+
+  Map<String, dynamic> toMap() {
+    return {
+      'pokemon_v2_pokemontypes':
+          pokemonV2Pokemontypes.map((x) => x.toMap()).toList(),
+    };
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['name'] = this.name;
-    data['id'] = this.id;
-    if (this.pokemonV2Pokemons != null) {
-      data['pokemon_v2_pokemons'] =
-          this.pokemonV2Pokemons!.map((v) => v.toJson()).toList();
-    }
-    return data;
+  factory PokemonV2Pokemons.fromMap(Map<String, dynamic> map) {
+    return PokemonV2Pokemons(
+      pokemonV2Pokemontypes: List<PokemonV2Pokemontypes>.from(
+          map['pokemon_v2_pokemontypes']
+              ?.map((x) => PokemonV2Pokemontypes.fromMap(x))),
+    );
   }
+
+  String toJson() => json.encode(toMap());
+
+  factory PokemonV2Pokemons.fromJson(String source) =>
+      PokemonV2Pokemons.fromMap(json.decode(source));
 }
 
-class PokemonV2Pokemons {
-  List<PokemonV2Pokemontypes>? pokemonV2Pokemontypes;
+class PokemonV2Pokemontypes extends Equatable {
+  final PokemonV2Type pokemonV2Type;
 
-  PokemonV2Pokemons({this.pokemonV2Pokemontypes});
+  PokemonV2Pokemontypes({required this.pokemonV2Type});
 
-  PokemonV2Pokemons.fromJson(Map<String, dynamic> json) {
-    if (json['pokemon_v2_pokemontypes'] != null) {
-      List<PokemonV2Pokemontypes> pokemonV2Pokemontypes = [];
-      json['pokemon_v2_pokemontypes'].forEach((v) {
-        pokemonV2Pokemontypes.add(new PokemonV2Pokemontypes.fromJson(v));
-      });
-      this.pokemonV2Pokemontypes = pokemonV2Pokemontypes;
-    }
+  @override
+  List<Object?> get props => [pokemonV2Type];
+
+  Map<String, dynamic> toMap() {
+    return {
+      'pokemon_v2_type': pokemonV2Type.toMap(),
+    };
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.pokemonV2Pokemontypes != null) {
-      data['pokemon_v2_pokemontypes'] =
-          this.pokemonV2Pokemontypes!.map((v) => v.toJson()).toList();
-    }
-    return data;
+  factory PokemonV2Pokemontypes.fromMap(Map<String, dynamic> map) {
+    return PokemonV2Pokemontypes(
+      pokemonV2Type: PokemonV2Type.fromMap(map['pokemon_v2_type']),
+    );
   }
+
+  String toJson() => json.encode(toMap());
+
+  factory PokemonV2Pokemontypes.fromJson(String source) =>
+      PokemonV2Pokemontypes.fromMap(json.decode(source));
 }
 
-class PokemonV2Pokemontypes {
-  PokemonV2Type? pokemonV2Type;
+class PokemonV2Type extends Equatable {
+  final String name;
 
-  PokemonV2Pokemontypes({this.pokemonV2Type});
+  PokemonV2Type({required this.name});
 
-  PokemonV2Pokemontypes.fromJson(Map<String, dynamic> json) {
-    pokemonV2Type = json['pokemon_v2_type'] != null
-        ? new PokemonV2Type.fromJson(json['pokemon_v2_type'])
-        : null;
+  @override
+  List<Object?> get props => [name];
+
+  Map<String, dynamic> toMap() {
+    return {
+      'name': name,
+    };
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.pokemonV2Type != null) {
-      data['pokemon_v2_type'] = this.pokemonV2Type!.toJson();
-    }
-    return data;
-  }
-}
-
-class PokemonV2Type {
-  String? name;
-
-  PokemonV2Type({this.name});
-
-  PokemonV2Type.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
+  factory PokemonV2Type.fromMap(Map<String, dynamic> map) {
+    return PokemonV2Type(
+      name: map['name'],
+    );
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['name'] = this.name;
-    return data;
-  }
+  String toJson() => json.encode(toMap());
+
+  factory PokemonV2Type.fromJson(String source) =>
+      PokemonV2Type.fromMap(json.decode(source));
 }
