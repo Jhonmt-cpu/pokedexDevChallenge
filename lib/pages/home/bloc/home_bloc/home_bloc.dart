@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:collection';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -17,6 +18,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   List<PokemonV2Pokemonspecies>? pokemonList;
 
   List<PokemonV2Pokemonspecies>? pokemonListFiltered;
+
+  String inputValue = "";
 
   int generation = 1;
 
@@ -40,7 +43,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         this.pokemonListFiltered =
             this.pokemonList = pokemonGeneration.pokemonV2Pokemonspecies;
         if (this.pokemonListFiltered != null) {
-          _sortList();
+          _filterList();
           return HomeListLoadedState(
             pokemonList: pokemonListFiltered!,
           );
@@ -50,42 +53,41 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     }
 
     if (event is FilterListByInputEvent) {
-      int? valueNumber = int.tryParse(event.value);
-
-      if (valueNumber != null && pokemonListFiltered != null) {
-        List<PokemonV2Pokemonspecies> pokemonListFilteredByInput =
-            pokemonListFiltered!
-                .where((element) => element.id == valueNumber)
-                .toList();
-        yield HomeListLoadedState(pokemonList: pokemonListFilteredByInput);
-      } else if (pokemonList != null) {
-        String valueParsed = event.value.trim().toLowerCase();
-
-        if (valueParsed != "") {
-          List<PokemonV2Pokemonspecies> pokemonListFilteredByInput =
-              pokemonListFiltered!
-                  .where((element) => element.name.contains(valueParsed))
-                  .toList();
-          yield HomeListLoadedState(pokemonList: pokemonListFilteredByInput);
-        } else {
-          yield HomeListLoadedState(pokemonList: pokemonListFiltered!);
-        }
+      this.inputValue = event.value;
+      if (pokemonListFiltered != null) {
+        _filterList();
+        yield HomeListLoadedState(pokemonList: pokemonListFiltered!);
       }
     }
 
     if (event is SortListEvent) {
       this.sortType = event.sortType;
-      _sortList();
-      List<PokemonV2Pokemonspecies> listSorted = [];
-      pokemonListFiltered!.forEach((element) {
-        listSorted.add(PokemonV2Pokemonspecies(
-          name: element.name,
-          id: element.id,
-          pokemonV2Pokemons: element.pokemonV2Pokemons,
-        ));
-      });
+      if (pokemonListFiltered != null) {
+        _sortList();
+        yield HomeListLoadedState(pokemonList: pokemonListFiltered!);
+      }
+    }
+  }
 
-      yield HomeListLoadedState(pokemonList: listSorted);
+  void _filterList() {
+    int? valueNumber = int.tryParse(this.inputValue);
+
+    if (valueNumber != null) {
+      pokemonListFiltered =
+          pokemonList!.where((element) => element.id == valueNumber).toList();
+      _sortList();
+    } else {
+      String valueParsed = this.inputValue.trim().toLowerCase();
+
+      if (valueParsed != "") {
+        pokemonListFiltered = pokemonList!
+            .where((element) => element.name.contains(valueParsed))
+            .toList();
+        _sortList();
+      } else {
+        pokemonListFiltered = pokemonList!;
+        _sortList();
+      }
     }
   }
 

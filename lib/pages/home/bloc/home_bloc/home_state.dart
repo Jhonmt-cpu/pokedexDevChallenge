@@ -1,19 +1,13 @@
 part of 'home_bloc.dart';
 
-abstract class HomeState extends Equatable {
+abstract class HomeState {
   const HomeState();
-
-  @override
-  List<Object> get props => [];
 }
 
 class HomeListLoadingState extends HomeState {}
 
 class HomeListLoadedState extends HomeState {
   final List<PokemonV2Pokemonspecies> pokemonList;
-
-  @override
-  List<Object> get props => [pokemonList];
 
   HomeListLoadedState({required this.pokemonList});
 }
