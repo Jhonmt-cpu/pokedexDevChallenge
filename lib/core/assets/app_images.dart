@@ -8,6 +8,14 @@ class AppImages {
   static String get search => "assets/icons/search.svg";
   static String get noConnection => "assets/icons/no-connection.svg";
 
+  static String get short => "assets/heights/short.svg";
+  static String get medium => "assets/heights/medium.svg";
+  static String get tall => "assets/heights/tall.svg";
+
+  static String get light => "assets/weights/light.svg";
+  static String get normalW => "assets/weights/normal.svg";
+  static String get heavy => "assets/weights/heavy.svg";
+
   static String get grass => "assets/types/grass.svg";
   static String get poison => "assets/types/poison.svg";
   static String get fire => "assets/types/fire.svg";

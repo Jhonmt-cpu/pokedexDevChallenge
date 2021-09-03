@@ -50,4 +50,16 @@ class AppTextStyles {
     fontSize: 26,
     fontWeight: FontWeight.w700,
   );
+  static final TextStyle filterTitle = TextStyle(
+    fontFamily: 'SfPro',
+    color: AppColors.textBlack,
+    fontSize: 16,
+    fontWeight: FontWeight.w700,
+  );
+  static final TextStyle rangeSliderText = TextStyle(
+    fontFamily: 'SfPro',
+    color: AppColors.textGray,
+    fontSize: 12,
+    fontWeight: FontWeight.w500,
+  );
 }

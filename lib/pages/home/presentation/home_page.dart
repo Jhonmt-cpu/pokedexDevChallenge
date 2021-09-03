@@ -3,18 +3,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get_it/get_it.dart';
-import 'package:pokedex_dev_challenge/core/styles/app_colors.dart';
-import 'package:pokedex_dev_challenge/core/core.dart';
-import 'package:pokedex_dev_challenge/core/widgets/GradientIcon.dart';
-import 'package:pokedex_dev_challenge/pages/home/bloc/generation_tab/generation_tab_bloc.dart';
-import 'package:pokedex_dev_challenge/pages/home/bloc/home_bloc/home_bloc.dart';
-import 'package:pokedex_dev_challenge/pages/home/bloc/input_bloc/input_bloc.dart';
-import 'package:pokedex_dev_challenge/pages/home/bloc/sliding_sheet/sliding_sheet_bloc.dart';
-import 'package:pokedex_dev_challenge/pages/home/bloc/sort_tab/sort_tab_bloc.dart';
-import 'package:pokedex_dev_challenge/pages/home/infra/repositories/home_repository.dart';
-import 'package:pokedex_dev_challenge/pages/home/presentation/widgets/pokemon_item.dart';
-import 'package:pokedex_dev_challenge/pages/home/presentation/widgets/sliding_sheet_tabs/generation_tab.dart';
-import 'package:pokedex_dev_challenge/pages/home/presentation/widgets/sliding_sheet_tabs/sort_tab.dart';
+import 'package:pokedex_dev_challenge/pages/home/bloc/filter_tab/filter_tab_bloc.dart';
+import 'package:pokedex_dev_challenge/pages/home/presentation/widgets/sliding_sheet_tabs/filter_tab.dart';
+import '../../../core/styles/app_colors.dart';
+import '../../../core/core.dart';
+import '../../../core/widgets/gradient_icon.dart';
+import '../bloc/generation_tab/generation_tab_bloc.dart';
+import '../bloc/home_bloc/home_bloc.dart';
+import '../bloc/input_bloc/input_bloc.dart';
+import '../bloc/sliding_sheet/sliding_sheet_bloc.dart';
+import '../bloc/sort_tab/sort_tab_bloc.dart';
+import '../infra/repositories/home_repository.dart';
+import '../presentation/widgets/pokemon_item.dart';
+import '../presentation/widgets/sliding_sheet_tabs/generation_tab.dart';
+import '../presentation/widgets/sliding_sheet_tabs/sort_tab.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
@@ -30,6 +32,7 @@ class HomePage extends StatelessWidget {
     GenerationTabBloc generationTabBloc =
         BlocProvider.of<GenerationTabBloc>(context);
     SortTabBloc sortTabBloc = BlocProvider.of<SortTabBloc>(context);
+    FilterTabBloc filterTabBloc = BlocProvider.of<FilterTabBloc>(context);
 
     double screenWidth = MediaQuery.of(context).size.width;
     double statusHeight = MediaQuery.of(context).padding.top;
@@ -108,6 +111,17 @@ class HomePage extends StatelessWidget {
                       width: 20,
                     ),
                     GestureDetector(
+                      onTap: () {
+                        slidingSheetBloc.add(
+                          OpenSlidingSheetEvent(
+                            context: context,
+                            page: FilterTab(
+                              homeBloc: homeBloc,
+                              filterTabBloc: filterTabBloc,
+                            ),
+                          ),
+                        );
+                      },
                       child: SvgPicture.asset(
                         AppImages.filter,
                         color: AppColors.textBlack,

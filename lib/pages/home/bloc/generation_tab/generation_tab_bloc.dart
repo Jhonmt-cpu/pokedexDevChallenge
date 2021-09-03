@@ -18,7 +18,7 @@ class GenerationTabBloc extends Bloc<GenerationTabEvent, GenerationTabState> {
     if (event is ChangeGeneration) {
       generationId = event.generationIdSelected;
       yield GeneraionTabSelected(
-        generationIdSelected: event.generationIdSelected,
+        generationIdSelected: generationId,
       );
     }
   }

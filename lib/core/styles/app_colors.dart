@@ -10,6 +10,14 @@ class AppColors {
   static final Color backgroundDefaultInput = Color(0xFFF2F2F2);
   static final Color backgroundPressedInput = Color(0xFFE2E2E2);
 
+  static final Color short = Color(0xFFFFC5E6);
+  static final Color medium = Color(0xFFAEBFD7);
+  static final Color tall = Color(0xFFAAACB8);
+
+  static final Color light = Color(0xFF99CD7C);
+  static final Color normal = Color(0xFF57B2DC);
+  static final Color heavy = Color(0xFF5A92A5);
+
   static final Color typeGrass = Color(0xFF62B957);
   static final Color typePoison = Color(0xFFA552CC);
   static final Color typeFire = Color(0xFFFD7D24);

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex_dev_challenge/core/core.dart';
 
-class SortButton extends StatelessWidget {
-  const SortButton({
+class TabButton extends StatelessWidget {
+  const TabButton({
     Key? key,
     required this.onPressed,
     required this.text,

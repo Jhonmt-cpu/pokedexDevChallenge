@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokedex_dev_challenge/core/core.dart';
 import 'package:pokedex_dev_challenge/pages/home/bloc/home_bloc/home_bloc.dart';
 import 'package:pokedex_dev_challenge/pages/home/bloc/sort_tab/sort_tab_bloc.dart';
-import 'package:pokedex_dev_challenge/pages/home/presentation/widgets/sliding_sheet_tabs/widgets/sort_button.dart';
+import 'package:pokedex_dev_challenge/pages/home/presentation/widgets/sliding_sheet_tabs/widgets/tab_button.dart';
 
 class SortTab extends StatelessWidget {
   const SortTab({
@@ -46,7 +46,7 @@ class SortTab extends StatelessWidget {
                   style: AppTextStyles.description,
                 ),
               ),
-              SortButton(
+              TabButton(
                 onPressed: () {
                   if (sortTabBloc.sortTypeId != 1) {
                     homeBloc.add(
@@ -60,7 +60,7 @@ class SortTab extends StatelessWidget {
                 text: "Smallest number first",
                 isSelcted: state.sortTypeId == 1,
               ),
-              SortButton(
+              TabButton(
                 onPressed: () {
                   if (sortTabBloc.sortTypeId != 2) {
                     homeBloc.add(
@@ -74,7 +74,7 @@ class SortTab extends StatelessWidget {
                 text: "Highest number first",
                 isSelcted: state.sortTypeId == 2,
               ),
-              SortButton(
+              TabButton(
                 onPressed: () {
                   if (sortTabBloc.sortTypeId != 3) {
                     homeBloc.add(
@@ -88,7 +88,7 @@ class SortTab extends StatelessWidget {
                 text: "A-Z",
                 isSelcted: state.sortTypeId == 3,
               ),
-              SortButton(
+              TabButton(
                 onPressed: () {
                   if (sortTabBloc.sortTypeId != 4) {
                     homeBloc.add(

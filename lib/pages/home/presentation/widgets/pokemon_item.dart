@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:pokedex_dev_challenge/core/styles/app_gradients.dart';
 import 'package:pokedex_dev_challenge/core/core.dart';
 import 'package:pokedex_dev_challenge/core/values/type_colors_config.dart';
-import 'package:pokedex_dev_challenge/core/widgets/GradientIcon.dart';
+import 'package:pokedex_dev_challenge/core/widgets/gradient_icon.dart';
 import 'package:pokedex_dev_challenge/pages/home/domain/models/pokemons_generation.dart';
 import 'package:pokedex_dev_challenge/pages/home/presentation/widgets/badge.dart';
 

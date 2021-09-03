@@ -27,7 +27,7 @@ class SlidingSheetBloc extends Bloc<SlidingSheetEvent, SlidingSheetState> {
             cornerRadius: 30,
             snapSpec: const SnapSpec(
               snap: true,
-              snappings: [0.4, 1.0],
+              snappings: [0.4, 0.9],
               positioning: SnapPositioning.relativeToAvailableSpace,
             ),
             builder: (context, state) {

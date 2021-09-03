@@ -1,9 +1,9 @@
 import 'dart:async';
-import 'dart:collection';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:get_it/get_it.dart';
+import 'package:pokedex_dev_challenge/pages/home/bloc/filter_tab/filter_tab_bloc.dart';
 import 'package:pokedex_dev_challenge/pages/home/domain/models/pokemons_generation.dart';
 import 'package:pokedex_dev_challenge/pages/home/infra/repositories/home_repository.dart';
 
@@ -11,11 +11,13 @@ part 'home_event.dart';
 part 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
-  HomeBloc() : super(HomeListLoadingState());
+  HomeBloc(this.filterTabBloc) : super(HomeListLoadingState());
 
   HomeRepository _homeRepository = GetIt.instance<HomeRepository>();
 
-  List<PokemonV2Pokemonspecies>? pokemonList;
+  final FilterTabBloc filterTabBloc;
+
+  static List<PokemonV2Pokemonspecies>? pokemonList;
 
   List<PokemonV2Pokemonspecies>? pokemonListFiltered;
 
@@ -31,7 +33,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   ) async* {
     if (event is FetchHomeListEvent) {
       yield HomeListLoadingState();
-      this.pokemonList = null;
+      pokemonList = null;
       this.pokemonListFiltered = null;
       if (event.generationId != null) {
         this.generation = event.generationId!;
@@ -41,8 +43,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
       yield fetchedList.fold((l) => HomeListErrorState(), (pokemonGeneration) {
         this.pokemonListFiltered =
-            this.pokemonList = pokemonGeneration.pokemonV2Pokemonspecies;
+            pokemonList = pokemonGeneration.pokemonV2Pokemonspecies;
         if (this.pokemonListFiltered != null) {
+          filterTabBloc.add(ResetEvent());
           _filterList();
           return HomeListLoadedState(
             pokemonList: pokemonListFiltered!,
