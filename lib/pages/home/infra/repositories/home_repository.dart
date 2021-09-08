@@ -23,6 +23,8 @@ class HomeRepositoryImpl implements HomeRepository {
           name
           id
           pokemon_v2_pokemons {
+            height
+            weight
             pokemon_v2_pokemontypes {
               pokemon_v2_type {
                 name

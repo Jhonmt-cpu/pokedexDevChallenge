@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 
+import 'package:pokedex_dev_challenge/core/utils/get_pokemon_efficiency.dart';
+
 class PokemonsGeneration extends Equatable {
   final List<PokemonV2Pokemonspecies> pokemonV2Pokemonspecies;
 
@@ -34,7 +36,9 @@ class PokemonsGeneration extends Equatable {
 class PokemonV2Pokemonspecies extends Equatable {
   final String name;
   final int id;
+
   final List<PokemonV2Pokemons> pokemonV2Pokemons;
+  late final List<String> weaknesses;
 
   PokemonV2Pokemonspecies({
     required this.name,
@@ -43,7 +47,7 @@ class PokemonV2Pokemonspecies extends Equatable {
   });
 
   @override
-  List<Object?> get props => [name, id, pokemonV2Pokemons];
+  List<Object?> get props => [name, id, pokemonV2Pokemons, weaknesses];
 
   Map<String, dynamic> toMap() {
     return {
@@ -54,42 +58,43 @@ class PokemonV2Pokemonspecies extends Equatable {
   }
 
   factory PokemonV2Pokemonspecies.fromMap(Map<String, dynamic> map) {
-    return PokemonV2Pokemonspecies(
+    var pokemon = PokemonV2Pokemonspecies(
       name: map['name'],
       id: map['id'],
       pokemonV2Pokemons: List<PokemonV2Pokemons>.from(
           map['pokemon_v2_pokemons']?.map((x) => PokemonV2Pokemons.fromMap(x))),
     );
+    pokemon.weaknesses = getPokemonWeakenesses(pokemon
+        .pokemonV2Pokemons[0].pokemonV2Pokemontypes
+        .map((e) => e.pokemonV2Type.name)
+        .toList());
+    return pokemon;
   }
 
   String toJson() => json.encode(toMap());
 
   factory PokemonV2Pokemonspecies.fromJson(String source) =>
       PokemonV2Pokemonspecies.fromMap(json.decode(source));
-
-  PokemonV2Pokemonspecies copyWith({
-    String? name,
-    int? id,
-    List<PokemonV2Pokemons>? pokemonV2Pokemons,
-  }) {
-    return PokemonV2Pokemonspecies(
-      name: name ?? this.name,
-      id: id ?? this.id,
-      pokemonV2Pokemons: pokemonV2Pokemons ?? this.pokemonV2Pokemons,
-    );
-  }
 }
 
 class PokemonV2Pokemons extends Equatable {
+  final int height;
+  final int weight;
   final List<PokemonV2Pokemontypes> pokemonV2Pokemontypes;
 
-  PokemonV2Pokemons({required this.pokemonV2Pokemontypes});
+  PokemonV2Pokemons({
+    required this.pokemonV2Pokemontypes,
+    required this.height,
+    required this.weight,
+  });
 
   @override
-  List<Object?> get props => [pokemonV2Pokemontypes];
+  List<Object?> get props => [pokemonV2Pokemontypes, height, weight];
 
   Map<String, dynamic> toMap() {
     return {
+      'height': height,
+      'weight': weight,
       'pokemon_v2_pokemontypes':
           pokemonV2Pokemontypes.map((x) => x.toMap()).toList(),
     };
@@ -97,6 +102,8 @@ class PokemonV2Pokemons extends Equatable {
 
   factory PokemonV2Pokemons.fromMap(Map<String, dynamic> map) {
     return PokemonV2Pokemons(
+      height: map['height'],
+      weight: map['weight'],
       pokemonV2Pokemontypes: List<PokemonV2Pokemontypes>.from(
           map['pokemon_v2_pokemontypes']
               ?.map((x) => PokemonV2Pokemontypes.fromMap(x))),

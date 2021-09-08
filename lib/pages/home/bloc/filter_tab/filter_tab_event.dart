@@ -51,7 +51,7 @@ class ChangeWeightsEvent extends FilterTabEvent {
 }
 
 class ChangeRangeEvent extends FilterTabEvent {
-  final List<String> newRange;
+  final List<double> newRange;
 
   ChangeRangeEvent({required this.newRange});
 

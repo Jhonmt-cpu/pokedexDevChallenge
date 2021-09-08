@@ -103,6 +103,18 @@ class FilterTabBloc extends Bloc<FilterTabEvent, FilterTabState> {
         range: range,
       );
     }
+    if (event is ChangeRangeEvent) {
+      range = event.newRange;
+      yield FilterTabItensSelected(
+        types: types,
+        weaknesses: weaknesses,
+        heights: heights,
+        weights: weights,
+        minRangeNumber: minRangeNumber,
+        maxRangeNumber: maxRangeNumber,
+        range: range,
+      );
+    }
     if (event is ResetEvent) {
       List<PokemonV2Pokemonspecies>? pokemonList = HomeBloc.pokemonList;
 

@@ -1,5 +1,12 @@
+export 'assets/app_images.dart';
+export 'domain/types_efficiency.dart';
+export 'services/api_config.dart';
 export 'styles/app_colors.dart';
 export 'styles/app_gradients.dart';
 export 'styles/app_text_styles.dart';
-export 'assets/app_images.dart';
+export 'values/pokeapi_url.dart';
+export 'values/pokemon_type_list.dart';
+export 'values/type_colors_config.dart';
+export 'widgets/dismiss_keyboard.dart';
+export 'widgets/gradient_icon.dart';
 export './app_widget.dart';

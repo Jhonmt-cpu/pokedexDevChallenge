@@ -332,6 +332,17 @@ class FilterTab extends StatelessWidget {
                             );
                           },
                         ),
+                        onDragCompleted: (
+                          handlerIndex,
+                          lowerValue,
+                          upperValue,
+                        ) {
+                          filterTabBloc.add(
+                            ChangeRangeEvent(
+                              newRange: [lowerValue, upperValue],
+                            ),
+                          );
+                        },
                       ),
                     )
                   : Container(),
@@ -348,6 +359,15 @@ class FilterTab extends StatelessWidget {
                           filterTabBloc.add(
                             ResetEvent(),
                           );
+                          homeBloc.add(
+                            FilterListEvent(
+                              types: [],
+                              weakenesses: [],
+                              heights: [],
+                              weights: [],
+                              range: [],
+                            ),
+                          );
                         },
                         text: "Reset",
                         isSelcted: false,
@@ -358,7 +378,17 @@ class FilterTab extends StatelessWidget {
                     ),
                     Expanded(
                       child: TabButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          homeBloc.add(
+                            FilterListEvent(
+                              types: state.types,
+                              weakenesses: state.weaknesses,
+                              heights: state.heights,
+                              weights: state.weights,
+                              range: state.range,
+                            ),
+                          );
+                        },
                         text: "Apply",
                         isSelcted: true,
                       ),
