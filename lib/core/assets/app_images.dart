@@ -1,12 +1,15 @@
 class AppImages {
   static String get pokeball => "assets/patterns/pokeball.svg";
   static String get pattern6x3 => "assets/patterns/6x3.svg";
+  static String get pattern10x5 => "assets/patterns/10x5.svg";
+  static String get circle => "assets/patterns/circle.svg";
 
   static String get generation => "assets/icons/generation.svg";
   static String get sort => "assets/icons/sort.svg";
   static String get filter => "assets/icons/filter.svg";
   static String get search => "assets/icons/search.svg";
   static String get noConnection => "assets/icons/no-connection.svg";
+  static String get back => "assets/icons/back.svg";
 
   static String get short => "assets/heights/short.svg";
   static String get medium => "assets/heights/medium.svg";

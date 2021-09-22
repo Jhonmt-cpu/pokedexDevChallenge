@@ -88,7 +88,7 @@ class GenerationItem extends StatelessWidget {
             icon: AppImages.pattern6x3,
             size: 80,
             gradient: isSelected
-                ? AppGradients.gradientVectorWhite
+                ? AppGradients.gradientPokeballWhite
                 : AppGradients.gradientVectorGrey,
           ),
         ),

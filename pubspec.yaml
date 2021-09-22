@@ -25,6 +25,7 @@ dependencies:
   flutter_staggered_animations: ^1.0.0
   sliding_sheet: ^0.5.0
   another_xlider: ^1.0.0
+  bordered_text: ^2.0.0
 
 dev_dependencies:
   build_runner: ^2.1.1

@@ -23,10 +23,10 @@ class AppGradients {
 
   static final gradientVectorWhite = LinearGradient(
     colors: [
-      Color.fromRGBO(255, 255, 255, 0.1),
+      Color.fromRGBO(255, 255, 255, 0.3),
       Color.fromRGBO(255, 255, 255, 0),
     ],
-    stops: [0.4, 0.9],
+    stops: [0, 1],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
@@ -59,5 +59,25 @@ class AppGradients {
     stops: [0.7, 0.9],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
+  );
+
+  static final pokemonTitleName = LinearGradient(
+    colors: [
+      Color.fromRGBO(255, 255, 255, 0.3),
+      Color.fromRGBO(255, 255, 255, 0),
+    ],
+    stops: [0.55, 0.75],
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+  );
+
+  static final pokemonCircle = LinearGradient(
+    colors: [
+      Color.fromRGBO(255, 255, 255, 0),
+      Color.fromRGBO(255, 255, 255, 0.35),
+    ],
+    stops: [0.7, 0.9],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomCenter,
   );
 }

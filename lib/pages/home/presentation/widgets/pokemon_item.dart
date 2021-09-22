@@ -6,6 +6,8 @@ import 'package:pokedex_dev_challenge/core/values/type_colors_config.dart';
 import 'package:pokedex_dev_challenge/core/widgets/gradient_icon.dart';
 import 'package:pokedex_dev_challenge/pages/home/domain/models/pokemons_generation.dart';
 import 'package:pokedex_dev_challenge/pages/home/presentation/widgets/badge.dart';
+import 'package:pokedex_dev_challenge/pages/pokemon/domain/pokemon_page_args.dart';
+import 'package:pokedex_dev_challenge/pages/pokemon/presentation/pokemon_page.dart';
 
 class PokemonItem extends StatelessWidget {
   const PokemonItem({
@@ -22,98 +24,115 @@ class PokemonItem extends StatelessWidget {
     Color backgroundColor = _defineBackgroundTypeColor(
       pokemon.pokemonV2Pokemons[0].pokemonV2Pokemontypes[0].pokemonV2Type.name,
     );
-    return Stack(
-      children: [
-        Column(
-          children: [
-            Container(
-              height: 25,
-            ),
-            Container(
-              height: 115,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: backgroundColor,
-              ),
-            ),
-          ],
-        ),
-        Positioned(
-          top: 10,
-          left: 70,
-          child: GradientIcon(
-            gradient: AppGradients.gradientVector,
-            icon: AppImages.pattern6x3,
-            size: 74,
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(
+          context,
+          PokemonPage.routeName,
+          arguments: PokemonPageArgs(
+            pokemon,
           ),
-        ),
-        Positioned(
-          top: 10,
-          left: 180,
-          child: GradientIcon(
-            gradient: AppGradients.gradientVector,
-            icon: AppImages.pokeball,
-            size: 145,
-          ),
-        ),
-        Positioned(
-          top: 0,
-          left: 170,
-          child: CachedNetworkImage(
-            width: 130,
-            height: 130,
-            imageUrl:
-                "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png",
-            progressIndicatorBuilder: (context, url, downloadProgress) =>
-                Center(
-              child: Container(
-                width: 50,
-                height: 50,
-                child: CircularProgressIndicator(
-                  value: downloadProgress.progress,
-                  valueColor: AlwaysStoppedAnimation<Color>(
-                    typeColorsConfig[pokemon.pokemonV2Pokemons[0]
-                        .pokemonV2Pokemontypes[0].pokemonV2Type.name] as Color,
-                  ),
-                ),
-              ),
-            ),
-            errorWidget: (context, url, error) => Icon(Icons.error),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(
-            top: 45,
-            left: 20,
-            bottom: 20,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+        );
+      },
+      child: Stack(
+        children: [
+          Column(
             children: [
-              Text(
-                "#" + pokemon.id.toString().padLeft(3, '0'),
-                style: AppTextStyles.pokemonNumber,
+              Container(
+                height: 25,
               ),
-              Text(
-                nameWithFirstUpperCase,
-                style: AppTextStyles.pokemonName,
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              Row(
-                children: pokemon.pokemonV2Pokemons[0].pokemonV2Pokemontypes
-                    .map((element) {
-                  return Padding(
-                    padding: const EdgeInsets.only(left: 5),
-                    child: Badge(type: element.pokemonV2Type.name),
-                  );
-                }).toList(),
+              Container(
+                height: 115,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: backgroundColor,
+                ),
               ),
             ],
           ),
-        ),
-      ],
+          Positioned(
+            top: 10,
+            left: 70,
+            child: GradientIcon(
+              gradient: AppGradients.gradientVector,
+              icon: AppImages.pattern6x3,
+              size: 74,
+            ),
+          ),
+          Positioned(
+            top: 10,
+            left: 180,
+            child: GradientIcon(
+              gradient: AppGradients.gradientVector,
+              icon: AppImages.pokeball,
+              size: 145,
+            ),
+          ),
+          Positioned(
+            top: 0,
+            left: 170,
+            child: Hero(
+              tag: "imageFromHome${pokemon.id}",
+              child: CachedNetworkImage(
+                width: 130,
+                height: 130,
+                imageUrl:
+                    "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png",
+                progressIndicatorBuilder: (context, url, downloadProgress) =>
+                    Center(
+                  child: Container(
+                    width: 50,
+                    height: 50,
+                    child: CircularProgressIndicator(
+                      value: downloadProgress.progress,
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        typeColorsConfig[pokemon
+                            .pokemonV2Pokemons[0]
+                            .pokemonV2Pokemontypes[0]
+                            .pokemonV2Type
+                            .name] as Color,
+                      ),
+                    ),
+                  ),
+                ),
+                errorWidget: (context, url, error) => Icon(Icons.error),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+              top: 45,
+              left: 20,
+              bottom: 20,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "#" + pokemon.id.toString().padLeft(3, '0'),
+                  style: AppTextStyles.pokemonNumber,
+                ),
+                Text(
+                  nameWithFirstUpperCase,
+                  style: AppTextStyles.pokemonName,
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Row(
+                  children: pokemon.pokemonV2Pokemons[0].pokemonV2Pokemontypes
+                      .map((element) {
+                    return Padding(
+                      padding: const EdgeInsets.only(right: 5),
+                      child: Badge(type: element.pokemonV2Type.name),
+                    );
+                  }).toList(),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 

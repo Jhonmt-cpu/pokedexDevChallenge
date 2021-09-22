@@ -8,6 +8,12 @@ class AppTextStyles {
     fontSize: 32,
     fontWeight: FontWeight.w700,
   );
+  static final TextStyle title = TextStyle(
+    fontFamily: 'SfPro',
+    color: Colors.transparent,
+    fontSize: 100,
+    fontWeight: FontWeight.w700,
+  );
   static final TextStyle description = TextStyle(
     fontFamily: 'SfPro',
     color: AppColors.textGray,
@@ -61,5 +67,23 @@ class AppTextStyles {
     color: AppColors.textGray,
     fontSize: 12,
     fontWeight: FontWeight.w500,
+  );
+  static final TextStyle pokemonPageName = TextStyle(
+    fontFamily: 'SfPro',
+    color: AppColors.textWhite,
+    fontSize: 32,
+    fontWeight: FontWeight.w700,
+  );
+  static final TextStyle pokemonPageNumber = TextStyle(
+    fontFamily: 'SfPro',
+    color: AppColors.textNumber,
+    fontSize: 26,
+    fontWeight: FontWeight.w700,
+  );
+  static final TextStyle pokemonPageTabTitle = TextStyle(
+    fontFamily: 'SfPro',
+    color: AppColors.textWhite,
+    fontSize: 16,
+    fontWeight: FontWeight.w700,
   );
 }

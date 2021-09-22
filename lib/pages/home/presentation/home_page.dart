@@ -21,6 +21,8 @@ import '../presentation/widgets/sliding_sheet_tabs/sort_tab.dart';
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
 
+  static const routeName = '/';
+
   final HomeRepository homeRepository = GetIt.instance<HomeRepository>();
 
   @override

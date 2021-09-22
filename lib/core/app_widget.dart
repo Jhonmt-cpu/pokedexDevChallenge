@@ -8,41 +8,46 @@ import 'package:pokedex_dev_challenge/pages/home/bloc/input_bloc/input_bloc.dart
 import 'package:pokedex_dev_challenge/pages/home/bloc/sliding_sheet/sliding_sheet_bloc.dart';
 import 'package:pokedex_dev_challenge/pages/home/bloc/sort_tab/sort_tab_bloc.dart';
 import 'package:pokedex_dev_challenge/pages/home/presentation/home_page.dart';
+import 'package:pokedex_dev_challenge/pages/pokemon/presentation/pokemon_page.dart';
 
 class AppWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     FilterTabBloc filterTabBloc = FilterTabBloc();
     return DismissKeyboard(
-      child: MaterialApp(
-        title: "Pokedex",
-        home: MultiBlocProvider(
-          providers: [
-            BlocProvider(
-              create: (context) => HomeBloc(filterTabBloc)
-                ..add(
-                  FetchHomeListEvent(),
-                ),
-            ),
-            BlocProvider(
-              create: (context) => InputBloc(),
-            ),
-            BlocProvider(
-              create: (context) => SlidingSheetBloc(),
-            ),
-            BlocProvider(
-              create: (context) => GenerationTabBloc(),
-            ),
-            BlocProvider(
-              create: (context) => SortTabBloc(),
-            ),
-            BlocProvider(
-              create: (context) => filterTabBloc,
-            ),
-          ],
-          child: HomePage(),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => HomeBloc(filterTabBloc)
+              ..add(
+                FetchHomeListEvent(),
+              ),
+          ),
+          BlocProvider(
+            create: (context) => InputBloc(),
+          ),
+          BlocProvider(
+            create: (context) => SlidingSheetBloc(),
+          ),
+          BlocProvider(
+            create: (context) => GenerationTabBloc(),
+          ),
+          BlocProvider(
+            create: (context) => SortTabBloc(),
+          ),
+          BlocProvider(
+            create: (context) => filterTabBloc,
+          ),
+        ],
+        child: MaterialApp(
+          title: "Pokedex",
+          debugShowCheckedModeBanner: false,
+          initialRoute: '/',
+          routes: {
+            HomePage.routeName: (context) => HomePage(),
+            PokemonPage.routeName: (context) => PokemonPage(),
+          },
         ),
-        debugShowCheckedModeBanner: false,
       ),
     );
   }
