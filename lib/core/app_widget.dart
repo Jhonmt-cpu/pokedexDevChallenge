@@ -8,6 +8,7 @@ import 'package:pokedex_dev_challenge/pages/home/bloc/input_bloc/input_bloc.dart
 import 'package:pokedex_dev_challenge/pages/home/bloc/sliding_sheet/sliding_sheet_bloc.dart';
 import 'package:pokedex_dev_challenge/pages/home/bloc/sort_tab/sort_tab_bloc.dart';
 import 'package:pokedex_dev_challenge/pages/home/presentation/home_page.dart';
+import 'package:pokedex_dev_challenge/pages/pokemon/bloc/pokemon_page/pokemon_page_bloc.dart';
 import 'package:pokedex_dev_challenge/pages/pokemon/presentation/pokemon_page.dart';
 
 class AppWidget extends StatelessWidget {
@@ -37,6 +38,9 @@ class AppWidget extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => filterTabBloc,
+          ),
+          BlocProvider(
+            create: (context) => PokemonPageBloc(),
           ),
         ],
         child: MaterialApp(

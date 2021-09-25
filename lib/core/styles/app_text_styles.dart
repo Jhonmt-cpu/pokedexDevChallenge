@@ -2,88 +2,112 @@ import 'package:flutter/material.dart';
 import 'package:pokedex_dev_challenge/core/styles/app_colors.dart';
 
 class AppTextStyles {
-  static final TextStyle applicationTitle = TextStyle(
+  static TextStyle applicationTitle = TextStyle(
     fontFamily: 'SfPro',
     color: AppColors.textBlack,
     fontSize: 32,
     fontWeight: FontWeight.w700,
   );
-  static final TextStyle title = TextStyle(
+  static TextStyle title = TextStyle(
     fontFamily: 'SfPro',
     color: Colors.transparent,
     fontSize: 100,
     fontWeight: FontWeight.w700,
   );
-  static final TextStyle description = TextStyle(
+  static TextStyle description = TextStyle(
     fontFamily: 'SfPro',
     color: AppColors.textGray,
     fontSize: 16,
     fontWeight: FontWeight.w400,
   );
-  static final TextStyle generationSelected = TextStyle(
+  static TextStyle generationSelected = TextStyle(
     fontFamily: 'SfPro',
     color: AppColors.textWhite,
     fontSize: 16,
     fontWeight: FontWeight.w400,
   );
-  static final TextStyle pokemonName = TextStyle(
+  static TextStyle pokemonName = TextStyle(
     fontFamily: 'SfPro',
     color: AppColors.textWhite,
     fontSize: 26,
     fontWeight: FontWeight.w700,
   );
-  static final TextStyle pokemonNumber = TextStyle(
+  static TextStyle pokemonNumber = TextStyle(
     fontFamily: 'SfPro',
     color: AppColors.textNumber,
     fontSize: 12,
     fontWeight: FontWeight.w700,
   );
-  static final TextStyle pokemonType = TextStyle(
+  static TextStyle pokemonType = TextStyle(
     fontFamily: 'SfPro',
     color: AppColors.textWhite,
     fontSize: 12,
     fontWeight: FontWeight.w500,
   );
-  static final TextStyle errorList = TextStyle(
+  static TextStyle errorList = TextStyle(
     fontFamily: 'SfPro',
     color: AppColors.textGray,
     fontSize: 18,
     fontWeight: FontWeight.w400,
   );
-  static final TextStyle tabTitle = TextStyle(
+  static TextStyle tabTitle = TextStyle(
     fontFamily: 'SfPro',
     color: AppColors.textBlack,
     fontSize: 26,
     fontWeight: FontWeight.w700,
   );
-  static final TextStyle filterTitle = TextStyle(
+  static TextStyle filterTitle = TextStyle(
     fontFamily: 'SfPro',
     color: AppColors.textBlack,
     fontSize: 16,
     fontWeight: FontWeight.w700,
   );
-  static final TextStyle rangeSliderText = TextStyle(
+  static TextStyle rangeSliderText = TextStyle(
     fontFamily: 'SfPro',
     color: AppColors.textGray,
     fontSize: 12,
     fontWeight: FontWeight.w500,
   );
-  static final TextStyle pokemonPageName = TextStyle(
+  static TextStyle pokemonPageName = TextStyle(
     fontFamily: 'SfPro',
     color: AppColors.textWhite,
     fontSize: 32,
     fontWeight: FontWeight.w700,
   );
-  static final TextStyle pokemonPageNumber = TextStyle(
+  static TextStyle pokemonPageNumber = TextStyle(
     fontFamily: 'SfPro',
     color: AppColors.textNumber,
     fontSize: 26,
     fontWeight: FontWeight.w700,
   );
-  static final TextStyle pokemonPageTabTitle = TextStyle(
+  static TextStyle pokemonPageTabTitle = TextStyle(
     fontFamily: 'SfPro',
     color: AppColors.textWhite,
     fontSize: 16,
     fontWeight: FontWeight.w700,
+  );
+  static TextStyle pokemonStat = TextStyle(
+    fontFamily: 'SfPro',
+    color: AppColors.textBlack,
+    fontSize: 12,
+    fontWeight: FontWeight.w500,
+  );
+  static TextStyle pokemonStatValueSmall = TextStyle(
+    fontFamily: 'SfPro',
+    color: AppColors.textGray,
+    fontSize: 10,
+    fontWeight: FontWeight.w400,
+  );
+  static TextStyle pokemonMaleText = TextStyle(
+    fontFamily: 'SfPro',
+    color: AppColors.typeFlying,
+    fontSize: 16,
+    fontWeight: FontWeight.w400,
+  );
+  static TextStyle pokemonFemaleText = TextStyle(
+    fontFamily: 'SfPro',
+    color: AppColors.typeFairy,
+    fontSize: 16,
+    fontWeight: FontWeight.w400,
   );
 }
