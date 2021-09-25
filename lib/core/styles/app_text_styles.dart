@@ -80,11 +80,17 @@ class AppTextStyles {
     fontSize: 26,
     fontWeight: FontWeight.w700,
   );
-  static TextStyle pokemonPageTabTitle = TextStyle(
+  static TextStyle pokemonPageTabTitleSelected = TextStyle(
     fontFamily: 'SfPro',
     color: AppColors.textWhite,
     fontSize: 16,
     fontWeight: FontWeight.w700,
+  );
+  static TextStyle pokemonPageTabTitleNotSelected = TextStyle(
+    fontFamily: 'SfPro',
+    color: AppColors.textWhite.withOpacity(0.5),
+    fontSize: 16,
+    fontWeight: FontWeight.w400,
   );
   static TextStyle pokemonStat = TextStyle(
     fontFamily: 'SfPro',
@@ -109,5 +115,17 @@ class AppTextStyles {
     color: AppColors.typeFairy,
     fontSize: 16,
     fontWeight: FontWeight.w400,
+  );
+  static TextStyle pokemonNumberEvolutionTab = TextStyle(
+    fontFamily: 'SfPro',
+    color: AppColors.textGray,
+    fontSize: 12,
+    fontWeight: FontWeight.w500,
+  );
+  static TextStyle pokemonEvolutionLevel = TextStyle(
+    fontFamily: 'SfPro',
+    color: AppColors.textBlack,
+    fontSize: 12,
+    fontWeight: FontWeight.w700,
   );
 }
