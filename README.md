@@ -71,7 +71,7 @@ Os ícones estão disponíveis na pasta `./assets/icons`
 Inicie seu projeto utilizando esse template no seu github como um repositório público<br>
 Faça um print, gif ou vídeo e compartilhe o resultado com a #devchallenge ou marcando nosso perfil @devchallenge!<br>
 
-Desafio criado por  <a href="https://umpontoseis.com/">umpontoseis</a> :)
+Desafio criado por  <a href="https://umpontoseis.com/">umpontoseis</a> :) 
 
 # Comunidade DevChallenge
 Site: https://www.devchallenge.com.br/ <br>
