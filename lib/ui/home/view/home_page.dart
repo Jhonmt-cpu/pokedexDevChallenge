@@ -16,15 +16,12 @@ import 'package:pokedex_dev_challenge/ui/home/components/tabs/sort_tab.dart';
 import 'package:pokedex_dev_challenge/ui/home/controller/home_controller.dart';
 
 class HomePage extends GetView<HomeController> {
-  HomePage({Key? key}) : super(key: key);
-
-  var screenHeight = Get.height;
-  var screenWidth = Get.width;
-  var statusBarHeight = Get.statusBarHeight;
-  var navBarHeight = Get.bottomBarHeight;
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var screenWidth = Get.width;
+    var navBarHeight = Get.bottomBarHeight;
     return Scaffold(
       backgroundColor: AppColors.backgroundWhite,
       resizeToAvoidBottomInset: false,
@@ -85,9 +82,9 @@ class HomePage extends GetView<HomeController> {
                           Obx(() {
                             return SortTab(
                               sortTypeId: controller.sortType.value,
-                              // changeGeneration: (generationId) {
-                              //   controller.fetchPokemonList(generationId);
-                              // },
+                              changeSortType: (sortType) {
+                                controller.sortType.value = sortType;
+                              },
                             );
                           }),
                         );
@@ -180,22 +177,21 @@ class HomePage extends GetView<HomeController> {
                 Expanded(
                   child: AnimationLimiter(
                     child: Obx(() {
-                      if (controller.pokemonListFiltred.isNotEmpty) {
+                      if (controller.pokemonList.isNotEmpty) {
                         return ListView.builder(
                           padding: EdgeInsets.only(
                             top: 0,
                             bottom: navBarHeight,
                           ),
                           physics: const BouncingScrollPhysics(),
-                          itemCount: controller.pokemonListFiltred.length,
+                          itemCount: controller.pokemonList.length,
                           itemBuilder: (context, index) {
                             return AnimationConfiguration.staggeredList(
                               position: index,
                               child: ScaleAnimation(
                                 child: FadeInAnimation(
                                   child: PokemonItem(
-                                    pokemon:
-                                        controller.pokemonListFiltred[index],
+                                    pokemon: controller.pokemonList[index],
                                   ),
                                 ),
                               ),

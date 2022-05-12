@@ -7,12 +7,12 @@ class TabButton extends StatelessWidget {
     Key? key,
     required this.onPressed,
     required this.text,
-    required this.isSelcted,
+    required this.isSelected,
   }) : super(key: key);
 
   final void Function() onPressed;
   final String text;
-  final bool isSelcted;
+  final bool isSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -21,14 +21,14 @@ class TabButton extends StatelessWidget {
       child: ElevatedButton(
         style: ButtonStyle(
             elevation: MaterialStateProperty.all<double>(2),
-            backgroundColor: isSelcted
+            backgroundColor: isSelected
                 ? MaterialStateProperty.all<Color>(
                     AppColors.typePsychic,
                   )
                 : MaterialStateProperty.all<Color>(
                     AppColors.backgroundDefaultInput,
                   ),
-            shadowColor: isSelcted
+            shadowColor: isSelected
                 ? MaterialStateProperty.all<Color>(
                     AppColors.typePsychic,
                   )
@@ -48,7 +48,7 @@ class TabButton extends StatelessWidget {
         onPressed: onPressed,
         child: Text(
           text,
-          style: isSelcted
+          style: isSelected
               ? AppTextStyles.generationSelected
               : AppTextStyles.description,
         ),

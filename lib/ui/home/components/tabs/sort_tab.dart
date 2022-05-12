@@ -4,16 +4,18 @@ import 'package:pokedex_dev_challenge/ui/home/components/tabs/components/tab_but
 
 class SortTab extends StatelessWidget {
   final int sortTypeId;
+  final Function(int) changeSortType;
 
   const SortTab({
     Key? key,
     required this.sortTypeId,
+    required this.changeSortType,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(
+      padding: const EdgeInsets.only(
         top: 30,
         left: 40,
         right: 40,
@@ -22,12 +24,12 @@ class SortTab extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             "Sort",
             style: AppTextStyles.tabTitle,
           ),
-          Padding(
-            padding: const EdgeInsets.only(
+          const Padding(
+            padding: EdgeInsets.only(
               top: 5,
               bottom: 35,
             ),
@@ -38,59 +40,39 @@ class SortTab extends StatelessWidget {
           ),
           TabButton(
             onPressed: () {
-              // if (sortTabBloc.sortTypeId != 1) {
-              //   homeBloc.add(
-              //     SortListEvent(sortType: 1),
-              //   );
-              //   sortTabBloc.add(
-              //     ChangeSortType(sortTypeId: 1),
-              //   );
-              // }
+              if (sortTypeId != 1) {
+                changeSortType(1);
+              }
             },
             text: "Smallest number first",
-            isSelcted: sortTypeId == 1,
+            isSelected: sortTypeId == 1,
           ),
           TabButton(
             onPressed: () {
-              // if (sortTabBloc.sortTypeId != 2) {
-              //   homeBloc.add(
-              //     SortListEvent(sortType: 2),
-              //   );
-              //   sortTabBloc.add(
-              //     ChangeSortType(sortTypeId: 2),
-              //   );
-              // }
+              if (sortTypeId != 2) {
+                changeSortType(2);
+              }
             },
             text: "Highest number first",
-            isSelcted: sortTypeId == 2,
+            isSelected: sortTypeId == 2,
           ),
           TabButton(
             onPressed: () {
-              // if (sortTabBloc.sortTypeId != 3) {
-              //   homeBloc.add(
-              //     SortListEvent(sortType: 3),
-              //   );
-              //   sortTabBloc.add(
-              //     ChangeSortType(sortTypeId: 3),
-              //   );
-              // }
+              if (sortTypeId != 3) {
+                changeSortType(3);
+              }
             },
             text: "A-Z",
-            isSelcted: sortTypeId == 3,
+            isSelected: sortTypeId == 3,
           ),
           TabButton(
             onPressed: () {
-              // if (sortTabBloc.sortTypeId != 4) {
-              //   homeBloc.add(
-              //     SortListEvent(sortType: 4),
-              //   );
-              //   sortTabBloc.add(
-              //     ChangeSortType(sortTypeId: 4),
-              //   );
-              // }
+              if (sortTypeId != 4) {
+                changeSortType(4);
+              }
             },
             text: "Z-A",
-            isSelcted: sortTypeId == 4,
+            isSelected: sortTypeId == 4,
           ),
         ],
       ),

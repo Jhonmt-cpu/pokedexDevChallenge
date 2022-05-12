@@ -5,6 +5,8 @@ import 'package:pokedex_dev_challenge/ui/home/repositories/home_repository.dart'
 class HomeController extends GetxController {
   final _homeRepository = Get.find<HomeRepository>();
 
+  var originalList = <PokemonV2Pokemonspecies>[];
+
   var pokemonList = <PokemonV2Pokemonspecies>[].obs;
 
   var inputFocused = false.obs;
@@ -15,12 +17,11 @@ class HomeController extends GetxController {
 
   var sortType = 1.obs;
 
-  List<PokemonV2Pokemonspecies> get pokemonListFiltred =>
-      _filterAll(pokemonList);
-
   @override
   void onInit() {
     super.onInit();
+    ever(inputValue, (_) => _filterAll(originalList));
+    ever(sortType, (_) => _filterAll(originalList));
     fetchPokemonList(1);
   }
 
@@ -36,14 +37,17 @@ class HomeController extends GetxController {
 
     fetchedList.fold((l) => throw Exception("implemnt error"),
         (pokemonGeneration) {
-      pokemonList.value = pokemonGeneration.pokemonV2Pokemonspecies;
+      originalList.clear();
+      originalList.addAll(pokemonGeneration.pokemonV2Pokemonspecies);
+      _filterAll(pokemonGeneration.pokemonV2Pokemonspecies);
     });
   }
 
-  List<PokemonV2Pokemonspecies> _filterAll(List<PokemonV2Pokemonspecies> list) {
+  void _filterAll(List<PokemonV2Pokemonspecies> list) {
     var listFilteredByInput = _filterListByInput(list);
     var listSorted = _sortList(listFilteredByInput);
-    return listSorted;
+    pokemonList.clear();
+    pokemonList.addAll(listSorted);
   }
 
   List<PokemonV2Pokemonspecies> _filterListByInput(
