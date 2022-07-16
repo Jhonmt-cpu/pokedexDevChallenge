@@ -9,16 +9,14 @@ class PokemonsGeneration {
 
   Map<String, dynamic> toMap() {
     return {
-      'pokemon_v2_pokemonspecies':
-          pokemonV2Pokemonspecies.map((x) => x.toMap()).toList(),
+      'pokemon_v2_pokemonspecies': pokemonV2Pokemonspecies.map((x) => x.toMap()).toList(),
     };
   }
 
   factory PokemonsGeneration.fromMap(Map<String, dynamic> map) {
     return PokemonsGeneration(
       pokemonV2Pokemonspecies: List<PokemonV2Pokemonspecies>.from(
-          map['pokemon_v2_pokemonspecies']
-              ?.map((x) => PokemonV2Pokemonspecies.fromMap(x))),
+          map['pokemon_v2_pokemonspecies']?.map((x) => PokemonV2Pokemonspecies.fromMap(x))),
     );
   }
 
@@ -32,7 +30,7 @@ class PokemonV2Pokemonspecies {
   final String name;
   final int id;
   final List<PokemonV2Pokemons> pokemonV2Pokemons;
-  final PokemonEvolutionChain pokemonEvolutionChain;
+  final PokemonEvolutionChain? pokemonEvolutionChain;
 
   late final List<String> weaknesses;
 
@@ -40,7 +38,7 @@ class PokemonV2Pokemonspecies {
     required this.name,
     required this.id,
     required this.pokemonV2Pokemons,
-    required this.pokemonEvolutionChain,
+    this.pokemonEvolutionChain,
   });
 
   Map<String, dynamic> toMap() {
@@ -48,23 +46,25 @@ class PokemonV2Pokemonspecies {
       'name': name,
       'id': id,
       'pokemon_v2_pokemons': pokemonV2Pokemons.map((x) => x.toMap()).toList(),
-      'pokemon_v2_evolutionchain': pokemonEvolutionChain.toMap(),
+      'pokemon_v2_evolutionchain': pokemonEvolutionChain?.toMap(),
     };
   }
 
   factory PokemonV2Pokemonspecies.fromMap(Map<String, dynamic> map) {
     var pokemon = PokemonV2Pokemonspecies(
-        name: map['name'],
-        id: map['id'],
-        pokemonV2Pokemons: List<PokemonV2Pokemons>.from(
-            map['pokemon_v2_pokemons']
-                ?.map((x) => PokemonV2Pokemons.fromMap(x))),
-        pokemonEvolutionChain:
-            PokemonEvolutionChain.fromMap(map["pokemon_v2_evolutionchain"]));
-    pokemon.weaknesses = getPokemonWeakenesses(pokemon
-        .pokemonV2Pokemons[0].pokemonV2Pokemontypes
-        .map((e) => e.pokemonV2Type.name)
-        .toList());
+      name: map['name'],
+      id: map['id'],
+      pokemonV2Pokemons: List<PokemonV2Pokemons>.from(
+          map['pokemon_v2_pokemons']?.map((x) => PokemonV2Pokemons.fromMap(x))),
+      pokemonEvolutionChain: map["pokemon_v2_evolutionchain"] != null
+          ? PokemonEvolutionChain.fromMap(
+              map["pokemon_v2_evolutionchain"],
+            )
+          : null,
+    );
+    pokemon.weaknesses = getPokemonWeaknesses(
+      pokemon.pokemonV2Pokemons[0].pokemonV2Pokemontypes.map((e) => e.pokemonV2Type.name).toList(),
+    );
     return pokemon;
   }
 
@@ -89,8 +89,7 @@ class PokemonV2Pokemons {
     return {
       'height': height,
       'weight': weight,
-      'pokemon_v2_pokemontypes':
-          pokemonV2Pokemontypes.map((x) => x.toMap()).toList(),
+      'pokemon_v2_pokemontypes': pokemonV2Pokemontypes.map((x) => x.toMap()).toList(),
     };
   }
 
@@ -99,8 +98,7 @@ class PokemonV2Pokemons {
       height: map['height'],
       weight: map['weight'],
       pokemonV2Pokemontypes: List<PokemonV2Pokemontypes>.from(
-          map['pokemon_v2_pokemontypes']
-              ?.map((x) => PokemonV2Pokemontypes.fromMap(x))),
+          map['pokemon_v2_pokemontypes']?.map((x) => PokemonV2Pokemontypes.fromMap(x))),
     );
   }
 
@@ -152,8 +150,7 @@ class PokemonV2Type {
 
   String toJson() => json.encode(toMap());
 
-  factory PokemonV2Type.fromJson(String source) =>
-      PokemonV2Type.fromMap(json.decode(source));
+  factory PokemonV2Type.fromJson(String source) => PokemonV2Type.fromMap(json.decode(source));
 }
 
 class PokemonEvolutionChain {
@@ -163,16 +160,14 @@ class PokemonEvolutionChain {
 
   Map<String, dynamic> toMap() {
     return {
-      'pokemon_v2_pokemonspecies':
-          pokemonSpeciesEvolution.map((x) => x.toMap()).toList(),
+      'pokemon_v2_pokemonspecies': pokemonSpeciesEvolution.map((x) => x.toMap()).toList(),
     };
   }
 
   factory PokemonEvolutionChain.fromMap(Map<String, dynamic> map) {
     return PokemonEvolutionChain(
       pokemonSpeciesEvolution: List<PokemonSpecieEvolution>.from(
-          map['pokemon_v2_pokemonspecies']
-              ?.map((x) => PokemonSpecieEvolution.fromMap(x))),
+          map['pokemon_v2_pokemonspecies']?.map((x) => PokemonSpecieEvolution.fromMap(x))),
     );
   }
 
@@ -202,8 +197,7 @@ class PokemonSpecieEvolution {
       'id': id,
       'name': name,
       'evolves_from_species_id': evolvesFromSpeciesId,
-      'pokemon_v2_pokemonevolutions':
-          pokemonV2Pokemonevolutions?.map((x) => x.toMap()).toList(),
+      'pokemon_v2_pokemonevolutions': pokemonV2Pokemonevolutions?.map((x) => x.toMap()).toList(),
       'pokemon_v2_pokemonspecy': pokemonPreviusEvolution,
     };
   }
@@ -217,8 +211,7 @@ class PokemonSpecieEvolution {
           : null,
       evolvesFromSpeciesId: map['evolves_from_species_id'],
       pokemonV2Pokemonevolutions: List<PokemonEvolution>.from(
-          map['pokemon_v2_pokemonevolutions']
-              ?.map((x) => PokemonEvolution.fromMap(x))),
+          map['pokemon_v2_pokemonevolutions']?.map((x) => PokemonEvolution.fromMap(x))),
     );
   }
 
@@ -272,6 +265,5 @@ class PokemonEvolution {
 
   String toJson() => json.encode(toMap());
 
-  factory PokemonEvolution.fromJson(String source) =>
-      PokemonEvolution.fromMap(json.decode(source));
+  factory PokemonEvolution.fromJson(String source) => PokemonEvolution.fromMap(json.decode(source));
 }

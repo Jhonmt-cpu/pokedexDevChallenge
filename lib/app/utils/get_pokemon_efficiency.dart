@@ -1,7 +1,7 @@
 import 'package:pokedex_dev_challenge/app/helpers/values/pokemon_types_damage_relation.dart';
 import 'package:pokedex_dev_challenge/app/models/types_efficiency.dart';
 
-Map<String, double> getPokemonDamageRalation(List<String> types) {
+Map<String, double> getPokemonDamageRelation(List<String> types) {
   var typesJson = PokemonTypesDamageRelation.typesDamageRelation;
 
   List<TypesEfficiency> typesData = List<TypesEfficiency>.from(
@@ -30,8 +30,8 @@ Map<String, double> getPokemonDamageRalation(List<String> types) {
   return damageRelation;
 }
 
-List<String> getPokemonWeakenesses(List<String> types) {
-  var damageRelation = getPokemonDamageRalation(types);
+List<String> getPokemonWeaknesses(List<String> types) {
+  var damageRelation = getPokemonDamageRelation(types);
 
   List<String> weaknesses = [];
 

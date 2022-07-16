@@ -13,8 +13,7 @@ class HomeRepositoryImpl implements HomeRepository {
   final ApiConfig _connect = Get.find<ApiConfig>();
 
   @override
-  Future<Either<Error, PokemonsGeneration>> getPokemonsByGeneration(
-      int generationId) async {
+  Future<Either<Error, PokemonsGeneration>> getPokemonsByGeneration(int generationId) async {
     String pokemonByGenerationQuerry = """
     query pokeQuery(\$id:Int!){
       pokemon_v2_generation_by_pk(id: \$id) {
@@ -49,8 +48,7 @@ class HomeRepositoryImpl implements HomeRepository {
     """;
 
     try {
-      var response =
-          await _connect.api.query(pokemonByGenerationQuerry, variables: {
+      var response = await _connect.api.query(pokemonByGenerationQuerry, variables: {
         "id": generationId,
       });
 
@@ -64,7 +62,7 @@ class HomeRepositoryImpl implements HomeRepository {
 
       return Right(pokemonsGeneration);
     } catch (e) {
-      print(e.toString());
+      print(e);
       return Left(Error());
     }
   }

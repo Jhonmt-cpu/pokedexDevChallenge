@@ -42,6 +42,8 @@ dependencies:
   cached_network_image: ^3.2.0
   sprintf: ^6.0.0
   sliding_sheet: ^0.5.2
+  another_xlider: ^1.0.0
+  bordered_text: ^2.0.0
 
 dev_dependencies:
   flutter_test:

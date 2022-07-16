@@ -11,6 +11,7 @@ import 'package:pokedex_dev_challenge/app/helpers/styles/app_text_styles.dart';
 import 'package:pokedex_dev_challenge/app/helpers/values/strings.dart';
 import 'package:pokedex_dev_challenge/app/utils/open_sliding_sheet.dart';
 import 'package:pokedex_dev_challenge/ui/home/components/pokemon_item.dart';
+import 'package:pokedex_dev_challenge/ui/home/components/tabs/filter_tab.dart';
 import 'package:pokedex_dev_challenge/ui/home/components/tabs/generation_tab.dart';
 import 'package:pokedex_dev_challenge/ui/home/components/tabs/sort_tab.dart';
 import 'package:pokedex_dev_challenge/ui/home/controller/home_controller.dart';
@@ -100,7 +101,10 @@ class HomePage extends GetView<HomeController> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        //Todo open slidingsheet wit filter tab
+                        openSlidingSheet(
+                          context,
+                          const FilterTab(),
+                        );
                       },
                       child: SvgPicture.asset(
                         AppImages.filter,
@@ -136,6 +140,7 @@ class HomePage extends GetView<HomeController> {
                           controller.inputFocused.value = focus;
                         },
                         child: TextField(
+                          controller: controller.inputTextController,
                           onChanged: (value) {
                             controller.inputValue.value = value;
                           },

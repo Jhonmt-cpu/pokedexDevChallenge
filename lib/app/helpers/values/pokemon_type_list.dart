@@ -19,6 +19,7 @@ class PokemonTypeList {
     "steel",
     "water",
   ];
+
   static final pokemonTypeListForPokemonPage = [
     "normal",
     "fire",
